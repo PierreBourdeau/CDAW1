@@ -1,0 +1,4 @@
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.4. Set the 'ServerName' directive globally to suppress this message
+[Tue Nov 09 15:17:41.170876 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/8.0.12 configured -- resuming normal operations
+[Tue Nov 09 15:17:41.171219 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Tue Nov 09 15:18:44.463434 2021] [php:notice] [pid 19] [client 172.19.0.1:45060] Xdebug: [Step Debug] Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(, referer: http://localhost:8080/
