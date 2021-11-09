@@ -10,5 +10,5 @@
 
 ## Dans ce dossier se trouve : 
 
-- [*] Les photographies des storyboards de l'application.
-- [*] Un site vitrine de test issue d'un template : https://startbootstrap.com/theme/freelancer
+- [X] Les photographies des storyboards de l'application.
+- [X] Un site vitrine de test issue d'un template : https://startbootstrap.com/theme/freelancer
