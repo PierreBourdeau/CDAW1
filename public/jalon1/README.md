@@ -1,33 +1,14 @@
-# Template project for CDAW
+# Jalon 1 :
 
-## Prerequisites
+**Les objectifs de ce premier jalon sont:**
+* réfléchir à la maquette de votre site Web projet en analysant le sujet du projet
+* réaliser une maquette fonctionnelle HTML / CSS de votre projet
 
-- git - https://git-scm.com/downloads
-- docker - https://docs.docker.com/get-docker/
-- vscode - https://code.visualstudio.com/
-- vscode remote container extension - https://code.visualstudio.com/docs/remote/containers
-- create a github account
+**Normalement, deux métiers sont à distinguer :**
+* le web designer qui réalise une maquette du site avec des logiciels tel que Adobe XD ou autre
+* le développeur front-end qui à partir d'une maquette (image, ...) réalise une maquette fonctionnelle en HTML/CSS/JS
 
-## How to use this template?
+## Dans ce dossier se trouve : 
 
-1. go to https://github.com/ceri-num/uv-cdaw-template
-2. click on the green button "use this template". This will create a similar git repository on your account
-3. clone your repository on your machine
-
-```
-git clone https://github.com/xxxx/uv-cdaw-template MyCDAWProject
-```
-4. Open the project with VSCode and re-open it with remote container extesion (the 1st launch takes time)
-
-You should have:
-- Apache on http://localhost:8080
-- PhpMyAdmin on http://localhost:8081
-    2 mysql accounts: root/root and mysql/mysql
-
-Simple ``it works`` test: http://localhost:8080/test-pdo/test-PDO.php
-
-xdebug is installed so you can put breakpoints in your code.
-
-# Others links
-
-- https://www.section.io/engineering-education/dockerized-php-apache-and-mysql-container-development-environment/
+- [*] Les photographies des storyboards de l'application.
+- [*] Un site vitrine de test issue d'un template : https://startbootstrap.com/theme/freelancer
