@@ -1,3 +1,17 @@
+<?php
+include './models/film.php';
+//The URL that we want to GET.
+$url = 'https://imdb-api.com/en/API/MostPopularMovies/k_rapxhaf0';
+
+//Use file_get_contents to GET the URL in question.
+$contents = file_get_contents($url);
+$contents = json_decode($contents);
+$filmsArray = array();
+for($i = 0; $i < 10; $i++) {
+    $filmsArray[$i] = new Film($contents->items[$i]->title,$contents->items[$i]->year,$contents->items[$i]->image,$contents->items[$i]->id);
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -29,9 +43,6 @@
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-    <!-- Custom Script -->
-    <script type="text/javascript" src="./main.js">
-    </script>
 </head>
 
 <body>
@@ -181,39 +192,36 @@
                     <div>
                         <div class="swiper mySwiper1">
                             <div class="swiper-wrapper">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h5>Adventure movie</h5>
-                    <div>
-                        <div class=" swiper mySwiper2">
-                            <div class="swiper-wrapper">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h5>Random movie</h5>
-                    <div>
-                        <div class="swiper mySwiper3">
-                            <div class="swiper-wrapper">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <h5>Other random movie</h5>
-                    <div>
-                        <div class="swiper mySwiper4">
-                            <div class="swiper-wrapper">
+                                <?php
+                                    foreach($filmsArray as $key=>$film) {
+                                        echo "<div class='swiper-slide tile-{$key}'><img src='{$film->image}'/></div>";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            var swiper = new Swiper(".mySwiper1", {
+                slidesPerView: "auto",
+                centeredSlides: true,
+                spaceBetween: 30,
+                loop: true,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                }
+            });
+        </script>
+        <script>
+        $(window).on('load', e => {
+            $('.preloader').fadeIn();
+            $('.predloader').fadeOut();
+        })
+
+        </script>
 </body>
 
 </html>

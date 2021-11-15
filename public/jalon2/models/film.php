@@ -1,9 +1,18 @@
 <?php
 class Film {
+
     public $title;
     public $year;
     public $image;
     public $id;
+    
+    public function __construct($title, $year, $image, $id) {
+        $this->title = $title;
+        $this->year =  $year;
+        $this->image = $image;
+        $this->id = $id;
+    }
+
 
     function setTitle($title) {
         $this->title = $title;
