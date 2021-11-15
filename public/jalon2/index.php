@@ -79,7 +79,7 @@ $filmsArray = $imdb->get10Films();
                 <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Action</button>
                 <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Love</button>
                 <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Christmas</button>
-                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Westen</button>
+                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Western</button>
                 <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Shonen</button>
                 <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Suspense</button>
                 <a class="w-100 px-2">Show more...</a>
