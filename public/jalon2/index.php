@@ -1,12 +1,14 @@
 <?php
 include './models/film.php';
-//The URL that we want to GET.
+//The URL that we want to GET. (from ImDB)
 $url = 'https://imdb-api.com/en/API/MostPopularMovies/k_rapxhaf0';
 
 //Use file_get_contents to GET the URL in question.
-$contents = file_get_contents($url);
+$contents = file_get_contents($url); 
 $contents = json_decode($contents);
+//Array containing Objects->Film
 $filmsArray = array();
+//Default set to 10. Could be increased/decreased or Could be foreach.
 for($i = 0; $i < 10; $i++) {
     $filmsArray[$i] = new Film($contents->items[$i]->title,$contents->items[$i]->year,$contents->items[$i]->image,$contents->items[$i]->id);
 }
