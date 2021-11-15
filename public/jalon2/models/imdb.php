@@ -5,8 +5,8 @@ class Imdb {
     public $url;
     public $contents;
 
-    public function __construct($url) {
-        $this->url = $url;
+    public function __construct($API_KEY) {
+        $this->url = 'https://imdb-api.com/en/API/MostPopularMovies/'.$API_KEY;
     }
 
     function get10Films() {

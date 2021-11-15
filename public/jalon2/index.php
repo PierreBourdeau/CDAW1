@@ -3,9 +3,9 @@ include_once './models/film.php';
 include_once './models/imdb.php';
 
 //The URL that we want to GET. (from ImDB)
-$url = 'https://imdb-api.com/en/API/MostPopularMovies/k_rapxhaf0';
+$API_KEY = 'k_rapxhaf0';
 
-$imdb = new Imdb($url);
+$imdb = new Imdb($API_KEY);
 $filmsArray = $imdb->get10Films();
 ?>
 
