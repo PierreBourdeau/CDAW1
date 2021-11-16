@@ -7,8 +7,28 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Understanding the application ! 
-:desktop_computer:
+# :desktop_computer: - Understanding the application !
+
+## :rocket: - Starting the application
+
+### 1. Databases
+The application handle database migrations and seeding.
+
+Run the following commands in terminal (from the root folder) :  
+    `php public/Projet/catalogue/artisan migrate`
+
+> This will create the tables in the configured database
+
+Then run (from the root folder) :  
+    `php public/Projet/catalogue/artisan db:seed`
+
+> This will seed the database with the initial default datas
+
+### 2. Start app. with artisan serve
+In order to start the application, we need to use php artisan. Lauch the terminal command  (from the root folder) :  
+    `php public/Projet/cataloguqe/artisan serve`
+
+Now you can access the application on : [localhost:8000](http://localhost:8000) by default.
 
 ## About Laravel
 
