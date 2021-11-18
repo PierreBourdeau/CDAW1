@@ -50,13 +50,13 @@ class RegisterController extends Controller
             'gender' => 'required'
         ];
 
-        $request->validate($rules, $messages);
+        $request->validate($rules);
 
         $user = new User;
         $input = $request->all();
         $input['password'] = bcrypt($request['password']);
         $user->fill($input)->save();
-
-        return back();
+        $redirectUrl = route('user.login');
+        return redirect($redirectUrl);
     }
 }

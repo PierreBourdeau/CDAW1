@@ -19,12 +19,13 @@ class CreateUsersTable extends Migration
             $table->date('birth');
             $table->string('gender');
             $table->string('email')->unique();
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('status');
-            $table->string('verification_link');
-            $table->string('email_verified');
+            $table->boolean('status')->default(1)->comment('1 - active, 0 - banned');
+            $table->string('country')->nullable();
+            /*$table->string('verification_link');
+            $table->string('email_verified');*/
             $table->timestamps();
         });
     }

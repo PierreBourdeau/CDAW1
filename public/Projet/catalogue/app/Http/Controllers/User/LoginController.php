@@ -54,21 +54,13 @@ class LoginController extends Controller
         }
 
         $bs = $currentLang->basic_setting;
-        $be = $currentLang->basic_extended;
 
         $rules = [
             'email'   => 'required|email',
             'password' => 'required'
         ];
 
-        if ($bs->is_recaptcha == 1) {
-            $rules['g-recaptcha-response'] = 'required|captcha';
-        }
-        $messages = [
-            'g-recaptcha-response.required' => 'Please verify that you are not a robot.',
-            'g-recaptcha-response.captcha' => 'Captcha error! try again later or contact site admin.',
-        ];
-        $request->validate($rules, $messages);
+        $request->validate($rules);
         //--- Validation Section Ends
 
         if (Session::has('link')) {
@@ -81,13 +73,15 @@ class LoginController extends Controller
         // Attempt to log the user in
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
 
-            // Check If Email is verified or not
+            // Check If Email is verified or not (currently disabled)
+            /*
             if (Auth::guard('web')->user()->email_verified == 'no' || Auth::guard('web')->user()->email_verified == 'No') {
                 Auth::guard('web')->logout();
 
                 return back()->with('err', __('Your Email is not Verified!'));
-            }
-            if (Auth::guard('web')->user()->status == '0') {
+            }*/
+            //Check if user is banned
+            if (Auth::guard('web')->user()->status == 0) {
                 Auth::guard('web')->logout();
 
                 return back()->with('err', __('Your account has been banned'));

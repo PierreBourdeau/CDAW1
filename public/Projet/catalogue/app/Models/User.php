@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'email';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,13 +21,11 @@ class User extends Authenticatable
         'fname',
         'lname',
         'email',
+        'birth',
+        'gender',
         'photo',
         'username',
         'password',
-        'phone',
-        'city',
-        'state',
-        'address',
         'country',
     ];
 

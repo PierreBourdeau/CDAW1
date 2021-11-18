@@ -1,8 +1,6 @@
-<div class="navbar-light bg-light col-2 vh-100" style="overflow-y: auto;">
-            <div class="text-center mb-3 py-3">
-                <a class="navbar-brand" href="#">CDAW</a>
-            </div>
-            <ul class=" nav flex-column">
+<div class="navbar-light bg-light flex-fill d-lg-block nav-side " style="overflow-y: auto; max-width: 30%;min-width: 0px;">
+     <div class="container-fluid text-center">
+         <ul class=" nav flex-column navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#"> <i class="fas fa-list-ol"></i> Series</a>
                 </li>
@@ -36,22 +34,22 @@
                 <h5 class="px-2">Playlists</h5>
                 <div class="list-group list-group-flush">
                     <button type="button"
-                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         Playlist 1
                         <span class="badge bg-primary rounded-pill">4</span>
                     </button>
                     <button type="button"
-                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         Playlist 2
                         <span class="badge bg-primary rounded-pill">10</span>
                     </button>
                     <button type="button"
-                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         Playlist 3
                         <span class="badge bg-primary rounded-pill">3</span>
                     </button>
                     <button type="button"
-                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                         Playlist 4
                         <span class="badge bg-primary rounded-pill">2</span>
                     </button>
@@ -63,24 +61,55 @@
             <h5 class="px-2">Loved</h5>
             <div class="list-group list-group-flush">
                 <button type="button"
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     Django Unchained
                     <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
                 </button>
                 <button type="button"
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     Star Wars II
                     <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
                 </button>
                 <button type="button"
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     Le seigneur des anneaux I
                     <span class="badge text-danger rounded-pill"><i class="fas fa-heart"></i></span>
                 </button>
                 <button type="button"
-                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Titanic
+                    <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
+                </button>
+                <button type="button"
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Titanic
+                    <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
+                </button>
+                <button type="button"
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Titanic
+                    <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
+                </button>
+                <button type="button"
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Titanic
+                    <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
+                </button>
+                <button type="button"
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Titanic
+                    <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
+                </button>
+                <button type="button"
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    Titanic
+                    <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
+                </button>
+                <button type="button"
+                    class="bg-light list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                     Titanic
                     <span class="badge rounded-pill text-danger"><i class="fas fa-heart"></i></span>
                 </button>
             </div>
-        </div>
+    </div>
+</div>

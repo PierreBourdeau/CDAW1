@@ -26,9 +26,17 @@ Then run (from the root folder) :
 
 ### 2. Start app. with artisan serve
 In order to start the application, we need to use php artisan. Lauch the terminal command  (from the root folder) :  
-    `php public/Projet/cataloguqe/artisan serve`
+    `php public/Projet/catalogue/artisan serve`
 
 Now you can access the application on : [localhost:8000](http://localhost:8000) by default.
+
+### 3. Application manipulations
+
+In order to reset all the database :
+    `php public/Projet/catalogue/artisan migrate:refresh``
+
+> This will delete then re-create all database tables. Don't forget to re-seed them.
+
 
 ## About Laravel
 
