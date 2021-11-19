@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      if(!app()->runningInConsole()){
         $langs = Language::all();
 
         view()->composer('*', function ($view)
@@ -49,5 +50,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('rtl', $rtl );
         });
         View::share('langs', $langs);
+      }
     }
 }
