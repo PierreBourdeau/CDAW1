@@ -47,4 +47,5 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], funct
     Route::post('/profile', 'User\UserController@profileUpdate')->name('user-profile-update');
     Route::post('/reset', 'User\UserController@reset')->name('user-reset-submit');
     Route::get('/logout', 'User\LoginController@logout')->name('user-logout');
+    Route::get('/dashboard/form/{name}', 'Front\FrontendController@addContentForm')->name('user-dashboard-form');
 });

@@ -3,31 +3,37 @@
 @section('content')
 <div class="d-flex flex-fill flex-column py-5 px-4 container-lg" style="min-height: 0px;overflow-y: auto;">
     @if ($user->role == 'admin')
-    <div class="row mb-5">
-        <div class="col-md">
+    <div class="row ">
+        <div class="col-md mb-5">
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-film"></i>
             </div>
             <h2>{{__('Add movie')}}</h2>
             <p>{{__('Add a film to the database providing all the associated datas.')}}</p>
-            <a href="#">{{__('Add movie')}} ></a>
+            <button id="addMovieBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
+                Add movie
+            </button>
         </div>
-        <div class="col-md">
+        <div class="col-md mb-5">
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-list-ol"></i>
             </div>
             <h2>{{__('Add serie')}}</h2>
             <p>{{__('Add a serie to the database providing all the associated datas.')}}</p>
-            <a href="#">{{__('Add serie')}} ></a>
+            <button id="addSerieBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
+                Add Serie
+            </button>
         </div>
-        <div class="col-md">
+        <div class="col-md mb-5">
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-book"></i>
             </div>
             <h2>{{__('Add book')}}</h2>
             <p>{{__('Add a book or a book serie to the database like : mangas, novel... providing all the associated datas')}}
             </p>
-            <a href="#">{{__('Add book')}} ></a>
+            <button id="addBookBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
+                Add book
+            </button>
         </div>
     </div>
     @endif
@@ -38,7 +44,6 @@
             </div>
             <h2>{{__('Profile settings')}}</h2>
             <p>{{__('Change your profile settings like : username, personal informations, profile picture...')}}</p>
-            <a href="#">{{__('Change settings')}} ></a>
         </div>
     </div>
     <form action="{{route('user-profile-update')}}" method="POST" enctype="multipart/form-data">
@@ -107,7 +112,6 @@
             </div>
             <h2>{{__('Secret infos settings')}}</h2>
             <p>{{__('Change your password...')}}</p>
-            <a href="#">{{__('Change password')}} ></a>
         </div>
     </div>
     <div class="row">
@@ -138,5 +142,98 @@
             @endif
         </div>
     </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">
+            {{__('Save change')}}
+        </button>
+    </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="addContentModal" tabindex="-1" aria-labelledby="addContentModalLabel" aria-hidden="true">
+    <div class=" modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContentModalLabel">
+                    {{__('Add content')}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('Close')}}</button>
+                <button type="button" class="btn btn-primary">{{__('Add')}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#addMovieBtn').on('click', e => {
+        e.preventDefault();
+        $.ajax({
+            url: '{{route("user-dashboard-form", ["name"=>"movie"])}}',
+            method: 'get',
+            error: (resp) => {
+                console.log(resp);
+            },
+            beforeSend: () => {
+                $(".preloader").fadeIn();
+            },
+            complete: () => {
+                $('.preloader').fadeOut();
+            },
+            success: (form) => {
+                $('#addContentModal .modal-body').html(form);
+                $('#addContentModal').modal('show');
+            }
+
+        })
+    })
+</script>
+<script>
+    $('#addSerieBtn').on('click', e => {
+        e.preventDefault();
+        $.ajax({
+            url: '{{route("user-dashboard-form", ["name"=>"serie"])}}',
+            method: 'get',
+            error: (resp) => {
+                console.log(resp);
+            },
+            beforeSend: () => {
+                $(".preloader").fadeIn();
+            },
+            complete: () => {
+                $('.preloader').fadeOut();
+            },
+            success: (form) => {
+                $('#addContentModal .modal-body').html(form);
+                $('#addContentModal').modal('show');
+            }
+
+        })
+    })
+</script>
+<script>
+    $('#addBookBtn').on('click', e => {
+        e.preventDefault();
+        $.ajax({
+            url: '{{route("user-dashboard-form", ["name"=>"book"])}}',
+            method: 'get',
+            error: (resp) => {
+                console.log(resp);
+            },
+            beforeSend: () => {
+                $(".preloader").fadeIn();
+            },
+            complete: () => {
+                $('.preloader').fadeOut();
+            },
+            success: (form) => {
+                $('#addContentModal .modal-body').html(form);
+                $('#addContentModal').modal('show');
+            }
+
+        })
+    })
+</script>
 @endsection

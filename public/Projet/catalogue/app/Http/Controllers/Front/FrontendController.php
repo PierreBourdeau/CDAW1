@@ -40,4 +40,8 @@ class FrontendController extends Controller
 
         return redirect()->route('front.index');
     }
+
+    public function addContentForm($name) {
+        return view('user.partials.add-content-form', ['name' => $name]);
+    }
 }
