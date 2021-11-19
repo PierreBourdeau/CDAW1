@@ -11,22 +11,37 @@
 
 ## :rocket: - Starting the application
 
+### 0. Prerequisite
+Firt of all, you need to install Laravel environment.
+From the pulled repo. go to the `public/Projet/catalogue` folder :   
+    
+    cd public/Projet/catalogue
+
+Then run :  
+
+    composer install
+
+
+
 ### 1. Databases
 The application handle database migrations and seeding.
 
 Run the following commands in terminal (from the root folder) :  
-    `php public/Projet/catalogue/artisan migrate`
+    
+    php public/Projet/catalogue/artisan migrate
 
 > This will create the tables in the configured database
 
 Then run (from the root folder) :  
-    `php public/Projet/catalogue/artisan db:seed`
+    
+    php public/Projet/catalogue/artisan db:seed
 
 > This will seed the database with the initial default datas
 
 ### 2. Start app. with artisan serve
 In order to start the application, we need to use php artisan. Lauch the terminal command  (from the root folder) :  
-    `php public/Projet/catalogue/artisan serve`
+    
+    php public/Projet/catalogue/artisan serve
 
 Now you can access the application on : [localhost:8000](http://localhost:8000) by default.
 
@@ -52,7 +67,8 @@ The default database seeding add the following datas  :floppy_disk: :
 ### 4. Application manipulations
 
 In order to reset all the database :  
-    `php public/Projet/catalogue/artisan migrate:refresh`
+    
+    php public/Projet/catalogue/artisan migrate:refresh
 
 > This will delete then re-create all database tables. Don't forget to re-seed them.
 
