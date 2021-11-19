@@ -30,8 +30,8 @@ class UserController extends Controller
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
-            'email' => 'required|email|unique:users,email,'.Auth::user()->email,
-            'username' => 'required|unique:users,username,'.Auth::user()->username,
+            'email' => 'required|email|unique:users,email,'.Auth::user()->email.',email',
+            'username' => 'required|unique:users,username,'.Auth::user()->username.',username',
         ]);
 
         $input = $request->all();
@@ -47,5 +47,33 @@ class UserController extends Controller
             $input['photo'] = $name;
         }
         $current_user->update($input);
+        return back();
+    }
+
+    public function reset(Request $request)
+    {
+
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required',
+            'password_confirmation' => 'required',
+        ]);
+        $user = Auth::user();
+
+        if (!empty($user->password)) {
+            if (!Hash::check($request->password, $user->password)) {
+                return back()->with('error', __('Current password Does not match.'));
+            }
+        }
+
+        if ($request->password == $request->confirmation_password) {
+            $input['password'] = Hash::make($request->password);
+        } else {
+            return back()->with('error', __('New password and confirmation do not match'));
+        }
+
+        $user->update($input);
+
+        return back();
     }
 }

@@ -45,4 +45,6 @@ Route::group(['middleware' => ['web', 'guest']], function () {
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], function () {
     Route::get('/dashboard', 'User\UserController@index')->name('user-dashboard');
     Route::post('/profile', 'User\UserController@profileUpdate')->name('user-profile-update');
+    Route::post('/reset', 'User\UserController@reset')->name('user-reset-submit');
+    Route::get('/logout', 'User\LoginController@logout')->name('user-logout');
 });

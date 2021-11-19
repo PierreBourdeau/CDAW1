@@ -2,6 +2,35 @@
 
 @section('content')
 <div class="d-flex flex-fill flex-column py-5 px-4 container-lg" style="min-height: 0px;overflow-y: auto;">
+    @if ($user->role == 'admin')
+    <div class="row mb-5">
+        <div class="col-md">
+            <div class="feature-icon bg-primary bg-gradient">
+                <i class="fas fa-film"></i>
+            </div>
+            <h2>{{__('Add movie')}}</h2>
+            <p>{{__('Add a film to the database providing all the associated datas.')}}</p>
+            <a href="#">{{__('Add movie')}} ></a>
+        </div>
+        <div class="col-md">
+            <div class="feature-icon bg-primary bg-gradient">
+                <i class="fas fa-list-ol"></i>
+            </div>
+            <h2>{{__('Add serie')}}</h2>
+            <p>{{__('Add a serie to the database providing all the associated datas.')}}</p>
+            <a href="#">{{__('Add serie')}} ></a>
+        </div>
+        <div class="col-md">
+            <div class="feature-icon bg-primary bg-gradient">
+                <i class="fas fa-book"></i>
+            </div>
+            <h2>{{__('Add book')}}</h2>
+            <p>{{__('Add a book or a book serie to the database like : mangas, novel... providing all the associated datas')}}
+            </p>
+            <a href="#">{{__('Add book')}} ></a>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col-md">
             <div class="feature-icon bg-primary bg-gradient">
@@ -13,6 +42,7 @@
         </div>
     </div>
     <form action="{{route('user-profile-update')}}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="row">
             <div class="d-flex justify-content-center">
                 <label for="photo" class="position-relative rounded-circle profile-pic-label" style="overflow: hidden;">
@@ -63,6 +93,11 @@
                     @endif
                 </div>
             </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">
+                    {{__('Save change')}}
+                </button>
+            </div>
         </div>
     </form>
     <div class="row py-5">
@@ -78,10 +113,10 @@
     <div class="row">
         <div class="mb-3">
             <label for="oldPasswordInput" class="form-label">{{__('Old password')}}</label>
-            <input required type="password" name="oldPassword" id="oldPasswordInput" class="form-control"
+            <input required type="password" name="old_password" id="oldPasswordInput" class="form-control"
                 placeholder="Old password" aria-label="Old password">
-            @if ($errors->has('oldPassword'))
-            <p class="text-danger mb-0 mt-2">{{$errors->first('oldPassword')}}</p>
+            @if ($errors->has('old_password'))
+            <p class="text-danger mb-0 mt-2">{{$errors->first('old_password')}}</p>
             @endif
         </div>
     </div>

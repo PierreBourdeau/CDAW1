@@ -30,10 +30,29 @@ In order to start the application, we need to use php artisan. Lauch the termina
 
 Now you can access the application on : [localhost:8000](http://localhost:8000) by default.
 
-### 3. Application manipulations
+### 3. Application default datas
+The default database seeding add the following datas  :floppy_disk: :
 
-In order to reset all the database :
-    `php public/Projet/catalogue/artisan migrate:refresh``
+| Users        | email           | password  | role |
+| ------------- |:-------------:| :-----:| ------: |
+| James Bond    | jbond@email.com | password | admin |
+| Jhon Doe      | jdoe@email.com  |   password | user |
+
+| Language        | default           | code  | rtl |
+| ------------- |:-------------:| :-----:| ------: |
+| English    | true | en | false |
+| French      | false  |   fr | false |
+
+| Default settings | value  |
+| ------------- |:-------------:|
+| Language id    | english lang. id |
+| Website title      | UV CDAW  |
+
+
+### 4. Application manipulations
+
+In order to reset all the database :  
+    `php public/Projet/catalogue/artisan migrate:refresh`
 
 > This will delete then re-create all database tables. Don't forget to re-seed them.
 

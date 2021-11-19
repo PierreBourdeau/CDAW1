@@ -39,16 +39,24 @@
             @endguest
             @auth
             <ul class="login navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item">
+                <li class="nav-item mx-3">
                     <div class="d-flex justify-content-center">
-                        <a href="{{route('user-dashboard')}}">
-                            @if (isset($user->photo))
-                            <img src="{{$user->photo}}" class="rounded-circle" height="24" width="24" />
-                            @else
-                            <img src="{{asset('default_profile.jpg');}}" class="rounded-circle" height="24"
-                                width="24" />
-                            @endif
-                        </a>
+                        <div class="dropdown">
+                            <a id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                @if (isset($user->photo))
+                                <img src="{{$user->photo}}" class="rounded-circle" height="24" width="24" />
+                                @else
+                                <img src="{{asset('default_profile.jpg');}}" class="rounded-circle" height="24"
+                                    width="24" />
+                                @endif
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start"
+                                aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="{{route('user-dashboard')}}">{{__('Profile')}}</a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{route('user-logout')}}">{{__('Logout')}}</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
                 <li class="nav-item">

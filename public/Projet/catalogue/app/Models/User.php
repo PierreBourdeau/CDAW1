@@ -11,6 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $primaryKey = 'email';
+    public $incrementing = false; //prevent primary key to auto update
 
     /**
      * The attributes that are mass assignable.
@@ -45,5 +46,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birth' => 'date',
     ];
 }
