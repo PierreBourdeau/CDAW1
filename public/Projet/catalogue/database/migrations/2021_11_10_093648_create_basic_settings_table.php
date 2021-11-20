@@ -15,10 +15,9 @@ class CreateBasicSettingsTable extends Migration
     {
         Schema::create('basic_settings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('language_id');
             $table->string('website_title');
 
-            $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
+            $table->foreignId('language_id')->constrained();
         });
     }
 

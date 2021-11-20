@@ -1,3 +1,10 @@
+.button-style-less {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 @media (max-width: 992px) {
   .nav-side {
     position: absolute;
@@ -172,4 +179,12 @@
 
 .profile-pic-label:hover .profile-pic-hover {
   height: 70%;
+}
+
+.swiper-slide {
+  box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
+}
+.swiper-slide:hover {
+  transform: scale(1.1);
+  transition: all .2s ease-in-out;
 }

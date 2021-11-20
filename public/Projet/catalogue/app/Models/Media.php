@@ -14,6 +14,12 @@ class Media extends Model
         'image',
         'rating',
         'description',
-        'creator'
+        'creator',
     ];
+    public function getMedia() {
+        return $this->morphTo(__FUNCTION__, 'media_type', 'media_id');
+    }
+    public function tags(){
+        return $this->hasMany('App\Models\Tag');
+    }
 }

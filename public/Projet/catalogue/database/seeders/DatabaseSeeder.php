@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
         //Create default english language
@@ -58,5 +59,24 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        //Populate database with ImDB datas - InTheater API
+        $api_result = file_get_contents('https://imdb-api.com/en/API/InTheaters/k_rapxhaf0'); 
+        $contents = json_decode($api_result);
+
+        for($i = 0; $i < 5; $i++) {
+
+            //add a movie and it's associated media
+            $movie = new \App\Models\Movie;
+            $movie->length = $contents->items[$i]->runtimeStr;
+            $movie->cast = $contents->items[$i]->stars;
+            $movie->save();
+            $movie->media()->create([
+                'title' => $contents->items[$i]->title,
+                'year' => $contents->items[$i]->year,
+                'image' => $contents->items[$i]->image,
+                'creator' => $contents->items[$i]->directors,
+                'description' => $contents->items[$i]->plot,
+            ]);
+        }
     }
 }

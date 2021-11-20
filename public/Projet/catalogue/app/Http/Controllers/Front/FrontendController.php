@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Language;
 use App\Models\BasicSetting as BS;
+use App\Models\Media;
+use App\Models\Movie;
 use Config;
 use Session;
 
@@ -29,7 +31,9 @@ class FrontendController extends Controller
         $lang_id = $currentLang->id;
         $bs = $currentLang->basic_setting;
 
-        return view('index');
+        $data['movies'] = Movie::get();
+
+        return view('index', $data);
     }
 
 
