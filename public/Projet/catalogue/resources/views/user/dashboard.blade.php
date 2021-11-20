@@ -8,7 +8,7 @@
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-film"></i>
             </div>
-            <h2>{{__('Add movie')}}</h2>
+            <h2>{{__('Movie')}}</h2>
             <p>{{__('Add a film to the database providing all the associated datas.')}}</p>
             <button id="addMovieBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
                 Add movie
@@ -18,7 +18,7 @@
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-list-ol"></i>
             </div>
-            <h2>{{__('Add serie')}}</h2>
+            <h2>{{__('Serie')}}</h2>
             <p>{{__('Add a serie to the database providing all the associated datas.')}}</p>
             <button id="addSerieBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
                 Add Serie
@@ -28,7 +28,7 @@
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-book"></i>
             </div>
-            <h2>{{__('Add book')}}</h2>
+            <h2>{{__('Book')}}</h2>
             <p>{{__('Add a book or a book serie to the database like : mangas, novel... providing all the associated datas')}}
             </p>
             <button id="addBookBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
