@@ -188,3 +188,14 @@
   transform: scale(1.1);
   transition: all .2s ease-in-out;
 }
+
+#mediaModal .modal-content {
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  color: #fff;
+}
+#mediaModal .close-btn {
+  color: #fff;
+  background: none;
+  border: none;
+}

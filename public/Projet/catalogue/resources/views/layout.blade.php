@@ -80,6 +80,33 @@
     </script>
 
     <script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>
+    <script>
+        function displayMediaModal(element) {
+            let media = JSON.parse($(element).attr('media'));
+            let media_type = media.media_type.split('\\').pop();
+            if (media_type == 'Movie') {
+                let mediaContent = JSON.parse($(element).attr('movie'));
+                $('#mediaModalContent').html('');
+                $('#mediaModalContent').append(`<div><strong class="me-2">{{__("Length")}} :</strong>${mediaContent.length}</div>`);
+                $('#mediaModalContent').append(`<div><strong class="me-2">{{__("Casting")}} :</strong>${mediaContent.cast}</div>`);
+            } else if (media_type === "Book") {
+
+            } else {
+
+            };
+            $('#mediaModalLabel').html(media.title);
+            $('#mediaModalPicture').attr('src', media.image);
+            $('#mediaModalYear').html(media.year);
+            $('#mediaModalCreator').html(media.creator);
+            $('#mediaModalDescription').html(media.description);
+            $('#mediaModalRating').html(media.rating);
+            let url = "{{route('media-edit', ['id' => ':id'])}}";
+            url = url.replace(':id', media.id);
+            $('#mediaModalEditBtn').attr('href', url);
+            $('#mediaModalDeleteInput').attr('value', media.id);
+            $('#mediaModal').modal('show');
+        }
+    </script>
 </body>
 
 </html>

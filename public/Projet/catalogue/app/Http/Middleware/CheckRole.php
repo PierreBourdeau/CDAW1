@@ -6,7 +6,7 @@ use Closure;
 use Auth;
 use Session;
 
-class CheckStatus
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,8 @@ class CheckStatus
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::guard('admin')->check() && !empty(Auth::guard('admin')->user()->role_id) && Auth::guard('admin')->user()->status == 0) {
-          Auth::guard('admin')->logout();
-          Session::flash('warning', 'Your account has been banned by Admin!');
-          return redirect()->route('admin.login');
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->role != 'admin') {
+          return back();
         }
         return $next($request);
     }

@@ -9,10 +9,10 @@
             <div>
                 <div class="swiper movieSwiper py-4">
                     <div class="swiper-wrapper">
-                        @foreach($movies as $movie)
-                        <div class='swiper-slide tile-{$key}'>
-                            <button type="button" class="button-style-less w-100" data-movie="{{$movie}}"
-                                data-media="{{$movie->media}}">
+                        @foreach($movies as $key=>$movie)
+                        <div class='swiper-slide tile-{{$key}}'>
+                            <button type="button" onclick="displayMediaModal(this)" id="tile-btn-{{$key}}"
+                                class="button-style-less w-100" movie='{{$movie}}' media='{{$movie->media}}'>
                                 <img src='{{$movie->media->image}}' />
                             </button>
                         </div>
@@ -27,6 +27,7 @@
     <button data-bs-toggle="button" class="btn btn-primary p-0 rounded-circle d-lg-none position-absolute"
         id="side-bar-expender"><i class="fas fa-angle-right"></i></button>
 </div>
+@includeif('partials.media-modal')
 <script>
     new Swiper(".movieSwiper", {
         slidesPerView: "auto",

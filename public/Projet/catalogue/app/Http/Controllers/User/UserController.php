@@ -9,7 +9,6 @@ use Validator;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use App;
-use App\Models\ProductOrder;
 use Session;
 
 class UserController extends Controller

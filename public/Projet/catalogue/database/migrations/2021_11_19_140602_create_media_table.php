@@ -17,7 +17,7 @@ class CreateMediaTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('year');
-            $table->smallInteger('rating')->nullable();
+            $table->bigInteger('rating')->default(0);
             $table->text('description');
             $table->string('creator');
             $table->string('image');

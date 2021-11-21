@@ -49,3 +49,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], funct
     Route::get('/logout', 'User\LoginController@logout')->name('user-logout');
     Route::get('/dashboard/form/{name}', 'Front\FrontendController@addContentForm')->name('user-dashboard-form');
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], function () {
+    Route::get('/edit/{id}', 'Admin\AdminController@editMediaView')->name('media-edit');
+    Route::post('/edit', 'Admin\AdminController@editMedia')->name('media-edit-form');
+    Route::post('/create', 'Admin\AdminController@createMedia')->name('media-create');
+    Route::post('/delete', 'Admin\AdminController@deleteMedia')->name('media-delete');
+});
