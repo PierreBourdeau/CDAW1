@@ -1,4 +1,4 @@
-<div class="navbar-light bg-light flex-fill d-lg-block nav-side " style="overflow-y: auto; max-width: 30%;min-width: 0px;">
+<div class="navbar-light bg-light flex-fill d-lg-block nav-side " style="overflow-y: auto; max-width: 15%;min-width: 0px;">
      <div class="container-fluid text-center">
          <ul class=" nav flex-column navbar-nav">
                 <li class="nav-item">
@@ -19,16 +19,16 @@
             </div>
             <h5 class="px-2">Tags</h5>
             <div class="d-flex flex-wrap">
-                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Action</button>
-                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Love</button>
-                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Christmas</button>
-                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Westen</button>
-                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Shonen</button>
-                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i>Suspense</button>
-                <a class="w-100 px-2">Show more...</a>
+                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Action</button>
+                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Love</button>
+                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Christmas</button>
+                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Western</button>
+                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Shonen</button>
+                <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Suspense</button>
+                <a class="w-100 px-2" href="#">Show more...</a>
             </div>
             <div class="container-fluid">
-                <hr />
+                <hr />  
             </div>
             <div>
                 <h5 class="px-2">Playlists</h5>
