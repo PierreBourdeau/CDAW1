@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/front/img/media/
+/public/front/img/user/
 /storage/*.key
 /vendor
 .env.backup
