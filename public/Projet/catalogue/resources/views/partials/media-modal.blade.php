@@ -38,9 +38,10 @@
             <div class="modal-footer">
                 <a class="btn btn-primary" href id="mediaModalEditBtn"> <i class="fas fa-edit"></i>
                     {{__('Edit')}}</a>
-                <form method="POST" method="{{route('media-delete')}}">
+                <form method="POST" action="{{route('media-delete')}}">
+                    @csrf
                     <input type="hidden" id='mediaModalDeleteInput' name="id" readonly value />
-                    <button type="submit" class="btn btn-danger" href id="mediaModalDeleteBtn"><i
+                    <button type="submit" class="btn btn-danger" id="mediaModalDeleteBtn"><i
                             class="fas fa-trash-alt"></i>{{__('Delete')}}</button>
                 </form>
             </div>

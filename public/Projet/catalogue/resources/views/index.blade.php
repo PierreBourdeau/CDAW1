@@ -13,7 +13,7 @@
                         <div class='swiper-slide tile-{{$key}}'>
                             <button type="button" onclick="displayMediaModal(this)" id="tile-btn-{{$key}}"
                                 class="button-style-less w-100" movie='{{$movie}}' media='{{$movie->media}}'>
-                                <img src='{{$movie->media->image}}' />
+                                <img src='{{asset("/front/img/media/".$movie->media["image"])}}' />
                             </button>
                         </div>
                         @endforeach
@@ -33,7 +33,7 @@
         slidesPerView: "auto",
         spaceBetween: 30,
         loop: true,
-        slidesPerGroup: 5,
+        slidesPerGroup: 1,
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",

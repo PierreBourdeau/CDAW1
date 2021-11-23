@@ -13,7 +13,7 @@ $type = array_pop($media_type);
         <input type="hidden" name="id" value="{{$media->id}}" readonly />
         <div class="mb-3">
             <label for="imageInput" class="form-label">{{__('Select Image')}}</label>
-            <input class="form-control" type="file" id="imageInput">
+            <input class="form-control" type="file" id="imageInput" name="image">
         </div>
         <div class="mb-3">
             <label for="titleInput" class="form-label">{{__('Title')}}</label>

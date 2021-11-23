@@ -26,10 +26,10 @@ class AdminController extends Controller
         return view('edit-media', $data);
     }
 
-    public function createMedia() {
-        if($request->has('type')){
-        $media_type = Media::findOrFail($request->input('type'));
-
+    public function createMedia(Request $request) {
+       if($request->has('type')){
+        $media_type = $request->input('type');
+        
         $rules = [
             'title' => 'required',
             'year' => 'required',
@@ -48,17 +48,16 @@ class AdminController extends Controller
         $input = $request->all();
         if ($file = $request->file('image')) {
             $name = time() . $file->getClientOriginalName();
-            $file->move('public/front/img/media/', $name);
+            $file->move('front/img/media/', $name);
             $input['image'] = $name;
         }
         $movie = new Movie;
-        $movie->insert($input);
-        $movie->save();
+        $movie->fill($input)->save();
 
         $media = new Media;
-        $media->insert($input);
+        $media->fill($input);
 
-        $movie->media->save($media);
+        $movie->media()->save($media);
         return back();
         }
     }
@@ -88,13 +87,13 @@ class AdminController extends Controller
         $input = $request->all();
         if ($file = $request->file('image')) {
             $name = time() . $file->getClientOriginalName();
-            $file->move('public/front/img/media/', $name);
+            $file->move('front/img/media/', $name);
             if ($media->image != null) {
-                if (file_exists(base_path('../public/front/img/media/' . $media->image))) {
-                    unlink(base_path('../public/front/img/media/' . $media->image));
+                if (file_exists(public_path('front/img/media/' . $media->image))) {
+                    unlink(public_path('front/img/media/' . $media->image));
                 }
+                $input['image'] = $name;
             }
-            $input['image'] = $name;
         }
         $media->update($input);
         $media->getMedia->update($input);
@@ -104,9 +103,11 @@ class AdminController extends Controller
 
     public function deleteMedia(Request $request) {
         $media = Media::findOrFail($request->input('id'));
-        $movie = $media->getMedia;
+        if (file_exists(public_path('front/img/media/' . $media->image))) {
+            unlink(public_path('front/img/media/' . $media->image));
+        }
+        $movie = $media->getMedia()->delete();
         $media->delete();
-        $movie->delete();
         return back();
     }
 }

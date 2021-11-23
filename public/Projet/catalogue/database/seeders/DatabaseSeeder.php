@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
- use Carbon\Carbon;
+use Carbon\Carbon;
+ 
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -70,13 +71,15 @@ class DatabaseSeeder extends Seeder
             $movie->length = $contents->items[$i]->runtimeStr;
             $movie->cast = $contents->items[$i]->stars;
             $movie->save();
+            $image = pathinfo($contents->items[$i]->image)['basename'];
             $movie->media()->create([
                 'title' => $contents->items[$i]->title,
                 'year' => $contents->items[$i]->year,
-                'image' => $contents->items[$i]->image,
+                'image' => $image,
                 'creator' => $contents->items[$i]->directors,
                 'description' => $contents->items[$i]->plot,
             ]);
+            file_put_contents('public/front/img/media/'.$image, file_get_contents($contents->items[$i]->image));
         }
     }
 }

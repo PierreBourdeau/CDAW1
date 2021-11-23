@@ -1,4 +1,4 @@
-<div class="navbar-light bg-light flex-fill d-lg-block nav-side " style="overflow-y: auto; max-width: 15%;min-width: 0px;">
+<div class="navbar-dark bg-dark flex-fill d-lg-block nav-side " style="overflow-y: auto; max-width: 15%;min-width: 0px;">
      <div class="container-fluid text-center">
          <ul class=" nav flex-column navbar-nav">
                 <li class="nav-item">

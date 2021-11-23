@@ -95,7 +95,7 @@
 
             };
             $('#mediaModalLabel').html(media.title);
-            $('#mediaModalPicture').attr('src', media.image);
+            $('#mediaModalPicture').attr('src', '{{asset("/front/img/media/")}}/' + media.image);
             $('#mediaModalYear').html(media.year);
             $('#mediaModalCreator').html(media.creator);
             $('#mediaModalDescription').html(media.description);
