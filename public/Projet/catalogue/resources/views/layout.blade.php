@@ -132,8 +132,10 @@
     <script>
         function getSwiper(element) {
             let getUrl = "{{route('get-swiper', ['id' => ':id'])}}";
-            if ($(element).data('id')) {
+            if ($(element).data('id') && $(element).data('count') > 0) {
                 getUrl = getUrl.replace(':id', $(element).data('id'));
+            } else if ($(element).data('id') && $(element).data('count') == 0) {
+                return false;
             } else {
                 getUrl = getUrl.replace(':id', 'like');
             }
@@ -151,7 +153,6 @@
                 },
                 success: (playlistSwiper) => {
                     $('#content-container').prepend(playlistSwiper);
-                    console.log(swiper);
                     new Swiper(".swiper", {
                         slidesPerView: "auto",
                         spaceBetween: 30,

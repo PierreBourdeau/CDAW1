@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mediaModalLabel"></h5>
+                <h5 class="modal-title" id="mediaModalLabel">{{$media->title}}</h5>
                 <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fas fa-times"></i></button>
             </div>
@@ -15,7 +15,8 @@
                 <div class="row mt-3">
                     <div class="col text-center">
                         @if(Auth::check())
-                        <button class="btn btn-primary" id="addToPlaylistBtn" data-media="{{$media->id}}" data-bs-target="#mediaModal" data-bs-toggle="modal">
+                        <button class="btn btn-primary" id="addToPlaylistBtn" data-media="{{$media->id}}"
+                            data-bs-target="#mediaModal" data-bs-toggle="modal">
                             <i class="far fa-plus-square"></i> {{__('Add to playlist')}}
                         </button>
                         @else
@@ -115,26 +116,26 @@
     })
 </script>
 <script>
-        $('#addToPlaylistBtn').on('click', (e) => {
-            e.preventDefault();
-            let getUrl = "{{route('get-add-to-playlist', ['media_id' => ':media_id'])}}";
-            getUrl = getUrl.replace(':media_id', $('#addToPlaylistBtn').data('media'));
-            $.ajax({
-                url: getUrl,
-                method: 'get',
-                error: (resp) => {
-                    console.log(resp);
-                },
-                beforeSend: () => {
-                    $(".preloader").fadeIn();
-                },
-                complete: () => {
-                    $('.preloader').fadeOut();
-                },
-                success: (modal) => {
-                    $('body').has('#playlistAddModalContainer').length ? $('#playlistAddModalContainer').replaceWith(resp) : $('body').append(modal);
-                    $('#playlistAddModal').modal('show');
-                }
-            })
+    $('#addToPlaylistBtn').on('click', (e) => {
+        e.preventDefault();
+        let getUrl = "{{route('get-add-to-playlist', ['media_id' => ':media_id'])}}";
+        getUrl = getUrl.replace(':media_id', $('#addToPlaylistBtn').data('media'));
+        $.ajax({
+            url: getUrl,
+            method: 'get',
+            error: (resp) => {
+                console.log(resp);
+            },
+            beforeSend: () => {
+                $(".preloader").fadeIn();
+            },
+            complete: () => {
+                $('.preloader').fadeOut();
+            },
+            success: (modal) => {
+                $('body').has('#playlistAddModalContainer').length ? $('#playlistAddModalContainer').replaceWith(resp) : $('body').append(modal);
+                $('#playlistAddModal').modal('show');
+            }
         })
+    })
 </script>
