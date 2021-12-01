@@ -54,6 +54,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], funct
     Route::post('/playlist/remove/media', 'User\UserController@removeMediaFromPlaylist')->name('remove-from-playlist');
     Route::post('/like', 'User\UserController@like')->name('media-like');
     Route::get('/list/playlists/add/{media_id}', 'User\UserController@addToPlaylistList')->name('get-add-to-playlist');
+    Route::get('/swiper/{id}', 'Front\FrontendController@getSwiper')->name('get-swiper');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], function () {

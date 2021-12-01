@@ -9,6 +9,7 @@ use App\Models\Media;
 use App\Models\Movie;
 use Config;
 use Session;
+use Auth;
 
 
 class FrontendController extends Controller
@@ -52,5 +53,22 @@ class FrontendController extends Controller
     public function getMedia($id) {
         $data['media'] = Media::findOrFail($id);
         return view('partials.media-modal', $data);
+    }
+
+    public function getSwiper($id) {
+        $user = Auth::user();
+        if($id != 'like') {
+            $playlist = $user->playlists()->findOrFail($id);
+            $data['medias'] = $playlist->medias;
+            $data['title'] = $playlist->name;
+        } else {
+            $liked = $user->liked;
+            $data['medias'] = [];
+            foreach ($liked as $like) {
+                array_push($data['medias'], $like->media);
+            }
+            $data['title'] = __('Like');
+        }
+        return view('partials.swiper', $data);
     }
 }

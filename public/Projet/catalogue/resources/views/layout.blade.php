@@ -102,32 +102,69 @@
         }
     </script>
     <script>
-$(document).on('submit', "#addPlaylistForm", (e) => {
-    e.preventDefault();
-    let form = $(this);
-    let fd = new FormData(document.getElementById('addPlaylistForm'));
-    $.ajax({
-        url: "{{ route('create-playlist') }}",
-        method: 'POST',
-        data: fd,
-        processData: false,
-        contentType: false,
-        error: (resp) => {
-            console.log("err");
-        },
-        beforeSend: () => {
-            $(".preloader").fadeIn();
-        },
-        complete: () => {
-            $('.preloader').fadeOut();
-        },
-        success: (playlistList) => {
-            $('#nav-playlists-list').html(playlistList);
-            $('#addPlaylistForm input[name="name"]').val('');
-            $('#playlistCollapse').collapse('toggle');
+        $(document).on('submit', "#addPlaylistForm", (e) => {
+            e.preventDefault();
+            let form = $(this);
+            let fd = new FormData(document.getElementById('addPlaylistForm'));
+            $.ajax({
+                url: "{{ route('create-playlist') }}",
+                method: 'POST',
+                data: fd,
+                processData: false,
+                contentType: false,
+                error: (resp) => {
+                    console.log("err");
+                },
+                beforeSend: () => {
+                    $(".preloader").fadeIn();
+                },
+                complete: () => {
+                    $('.preloader').fadeOut();
+                },
+                success: (playlistList) => {
+                    $('#nav-playlists-list').html(playlistList);
+                    $('#addPlaylistForm input[name="name"]').val('');
+                    $('#playlistCollapse').collapse('toggle');
+                }
+            })
+        })
+    </script>
+    <script>
+        function getSwiper(element) {
+            let getUrl = "{{route('get-swiper', ['id' => ':id'])}}";
+            if ($(element).data('id')) {
+                getUrl = getUrl.replace(':id', $(element).data('id'));
+            } else {
+                getUrl = getUrl.replace(':id', 'like');
+            }
+            $.ajax({
+                url: getUrl,
+                method: 'get',
+                error: (resp) => {
+                    console.log("err");
+                },
+                beforeSend: () => {
+                    $(".preloader").fadeIn();
+                },
+                complete: () => {
+                    $('.preloader').fadeOut();
+                },
+                success: (playlistSwiper) => {
+                    $('#content-container').prepend(playlistSwiper);
+                    console.log(swiper);
+                    new Swiper(".swiper", {
+                        slidesPerView: "auto",
+                        spaceBetween: 30,
+                        loop: true,
+                        slidesPerGroup: 1,
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        }
+                    });
+                }
+            })
         }
-    })
-})
     </script>
 </body>
 

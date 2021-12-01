@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex flex-fill " style="min-height: 0px;">
     @includeif('navbar-side')
-    <div class="container-fluid flex-fill " style="overflow-y: auto;min-width: 0px;">
+    <div id="content-container" class="container-fluid flex-fill " style="overflow-y: auto;min-width: 0px;">
         <div class="mt-3">
             <h5>{{__('Movies')}}</h5>
             <div>
@@ -29,7 +29,7 @@
 </div>
 
 <script>
-    new Swiper(".movieSwiper", {
+    var swiper = new Swiper(".swiper", {
         slidesPerView: "auto",
         spaceBetween: 30,
         loop: true,

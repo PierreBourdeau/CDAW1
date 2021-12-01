@@ -33,11 +33,14 @@
         </div>
         @auth
         <div>
-            <h5 class="px-2 text-light">Playlists <a class="" data-bs-toggle="collapse" href="#playlistCollapse"
+            <div class="d-flex align-items-baseline justify-content-center">
+                <h5 class="px-2 text-light">Playlists</h5>
+                <a class="badge bg-primary rounded-pill" data-bs-toggle="collapse" href="#playlistCollapse"
                     role="button" aria-expanded="false" aria-controls="playlistCollapse">
-                    <i class="fas fa-plus text-light"></i> </a></h5>
+                    <i class="fas fa-plus text-light"></i> </a>
+            </div>
             <div class="collapse" id="playlistCollapse">
-                <div class="card card-body">
+                <div class="card card-body bg-transparent">
                     <form id="addPlaylistForm">
                         @csrf
                         <input type="text" class="form-control" name="name" required />
@@ -51,9 +54,11 @@
         <div class="container-fluid">
             <hr />
         </div>
-        <h5 class="px-2 text-light">{{__('Liked')}}</h5>
+        <button class="button-style-less" onclick="getSwiper(this);">
+            <h5 class="px-2 text-light">{{__('Liked')}}</h5>
+        </button>
         <div id="nav-liked-list">
-            @includeif('partials.liked-list', ['user' => Auth::user()])    
+            @includeif('partials.liked-list', ['user' => Auth::user()])
         </div>
         @endauth
     </div>
