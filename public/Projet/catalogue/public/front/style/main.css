@@ -189,12 +189,12 @@
   transition: all .2s ease-in-out;
 }
 
-#mediaModal .modal-content {
+.black-modal .modal-content {
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(4px);
   color: #fff;
 }
-#mediaModal .close-btn {
+.black-modal .close-btn {
   color: #fff;
   background: none;
   border: none;

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['setlang'])->group(function () {
     Route::get('/', 'Front\FrontendController@index')->name('front.index');
 });
-
+Route::get('/media/{id}', 'Front\FrontendController@getMedia')->name('get-media');
 Route::get('/changelanguage/{lang}/{type?}', 'Front\FrontendController@changeLanguage')->name('changeLanguage');
 
 /*=======================================================
@@ -40,6 +40,7 @@ Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('/register/verify/{token}', 'User\RegisterController@token')->name('user-register-token');
     Route::get('/forgot', 'User\ForgotController@showforgotform')->name('user-forgot');
     Route::post('/forgot', 'User\ForgotController@forgot')->name('user-forgot-submit');
+
 });
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], function () {
@@ -48,6 +49,11 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], funct
     Route::post('/reset', 'User\UserController@reset')->name('user-reset-submit');
     Route::get('/logout', 'User\LoginController@logout')->name('user-logout');
     Route::get('/dashboard/form/{name}', 'Front\FrontendController@addContentForm')->name('user-dashboard-form');
+    Route::post('/playlist', 'User\UserController@createPlaylist')->name('create-playlist');
+    Route::post('/playlist/add/media', 'User\UserController@addMediaToPlaylist')->name('add-to-playlist');
+    Route::post('/playlist/remove/media', 'User\UserController@removeMediaFromPlaylist')->name('remove-from-playlist');
+    Route::post('/like', 'User\UserController@like')->name('media-like');
+    Route::get('/list/playlists/add/{media_id}', 'User\UserController@addToPlaylistList')->name('get-add-to-playlist');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], function () {

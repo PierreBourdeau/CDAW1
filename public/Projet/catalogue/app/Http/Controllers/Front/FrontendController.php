@@ -31,7 +31,7 @@ class FrontendController extends Controller
         $lang_id = $currentLang->id;
         $bs = $currentLang->basic_setting;
 
-        $data['movies'] = Movie::get();
+        $data['medias'] = Media::select('id','image')->get();
 
         return view('index', $data);
     }
@@ -47,5 +47,10 @@ class FrontendController extends Controller
 
     public function addContentForm($name) {
         return view('user.partials.add-content-form', ['name' => $name]);
+    }
+
+    public function getMedia($id) {
+        $data['media'] = Media::findOrFail($id);
+        return view('partials.media-modal', $data);
     }
 }

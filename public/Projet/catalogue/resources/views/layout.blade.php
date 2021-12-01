@@ -60,8 +60,6 @@
         @includeif('navbar-top')
         @yield('content')
     </div>
-
-
     <script>
         "use strict";
         var mainurl = "{{url('/')}}";
@@ -81,31 +79,55 @@
 
     <script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>
     <script>
-        function displayMediaModal(element) {
-            let media = JSON.parse($(element).attr('media'));
-            let media_type = media.media_type.split('\\').pop();
-            if (media_type == 'Movie') {
-                let mediaContent = JSON.parse($(element).attr('movie'));
-                $('#mediaModalContent').html('');
-                $('#mediaModalContent').append(`<div><strong class="me-2">{{__("Length")}} :</strong>${mediaContent.length}</div>`);
-                $('#mediaModalContent').append(`<div><strong class="me-2">{{__("Casting")}} :</strong>${mediaContent.cast}</div>`);
-            } else if (media_type === "Book") {
-
-            } else {
-
-            };
-            $('#mediaModalLabel').html(media.title);
-            $('#mediaModalPicture').attr('src', '{{asset("/front/img/media/")}}/' + media.image);
-            $('#mediaModalYear').html(media.year);
-            $('#mediaModalCreator').html(media.creator);
-            $('#mediaModalDescription').html(media.description);
-            $('#mediaModalRating').html(media.rating);
-            let url = "{{route('media-edit', ['id' => ':id'])}}";
-            url = url.replace(':id', media.id);
-            $('#mediaModalEditBtn').attr('href', url);
-            $('#mediaModalDeleteInput').attr('value', media.id);
-            $('#mediaModal').modal('show');
+        function displayMediaModal(id) {
+            let getUrl = "{{route('get-media', ['id' => ':id'])}}";
+            getUrl = getUrl.replace(':id', id);
+            $.ajax({
+                url: getUrl,
+                method: 'GET',
+                error: (resp) => {
+                    console.log(resp);
+                },
+                beforeSend: () => {
+                    $(".preloader").fadeIn();
+                },
+                complete: () => {
+                    $('.preloader').fadeOut();
+                },
+                success: (resp) => {
+                    $('body').has('#mediaModal').length ? $('#mediaModal').replaceWith(resp) : $('body').append(resp);
+                    $('#mediaModal').modal('show');
+                }
+            })
         }
+    </script>
+    <script>
+$(document).on('submit', "#addPlaylistForm", (e) => {
+    e.preventDefault();
+    let form = $(this);
+    let fd = new FormData(document.getElementById('addPlaylistForm'));
+    $.ajax({
+        url: "{{ route('create-playlist') }}",
+        method: 'POST',
+        data: fd,
+        processData: false,
+        contentType: false,
+        error: (resp) => {
+            console.log("err");
+        },
+        beforeSend: () => {
+            $(".preloader").fadeIn();
+        },
+        complete: () => {
+            $('.preloader').fadeOut();
+        },
+        success: (playlistList) => {
+            $('#nav-playlists-list').html(playlistList);
+            $('#addPlaylistForm input[name="name"]').val('');
+            $('#playlistCollapse').collapse('toggle');
+        }
+    })
+})
     </script>
 </body>
 

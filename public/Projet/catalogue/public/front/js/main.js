@@ -12,3 +12,4 @@ $('#side-bar-expender').on('click', e => {
         $('.nav-side').css('transform', 'translateX(-100%)');
     }
 })
+

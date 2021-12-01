@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Playlist;
 use DB;
 use App;
 use Session;
@@ -74,5 +75,62 @@ class UserController extends Controller
         $user->update($input);
 
         return back();
+    }
+
+    public function createPlaylist(Request $request) {
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $user = Auth::user();
+        $playlist = $user->playlists()->create([
+            'name' => $request->input('name'),
+        ]);
+        $data['user'] = Auth::user();
+        return view('partials.playlist-list', $data);
+    }
+
+    public function like(Request $request) {
+        $request->validate([
+            'media_id' => 'required'
+        ]);
+        $user = Auth::user();
+        $like = $user->liked()->where('media_id', $request->input('media_id'));
+        if($like->exists()) {
+            $like->delete();
+        } else {
+            $user->liked()->create([
+            'media_id' => $request->input('media_id'),
+        ]);
+        }
+        $data['user'] = $user;
+        return view('partials.liked-list', $data);
+    }
+
+    public function addMediaToPlaylist(Request $request) {
+        $request->validate([
+            'media_id' => 'required',
+            'playlist_id' => 'required'
+        ]);
+        $user = Auth::user();
+        $playlist = $user->playlists()->findOrFail($request->input('playlist_id'));
+        $playlist->medias()->syncWithoutDetaching($request->input('media_id'));
+        return back();
+    }
+
+    public function removeMediaFromPlaylist(Request $request) {
+        $request->validate([
+            'media_id' => 'required',
+            'playlist_id' => 'required'
+        ]);
+        $user = Auth::user();
+        $playlist = $user->playlists()->findOrFail($request->input('playlist_id'));
+        $playlist->medias()->detach($request->input('media_id'));
+        return back();
+    }
+
+    public function addToPlaylistList($media_id) {
+        $data['user'] = Auth::user();
+        $data['media'] = $media_id;
+        return view('partials.add-to-playlist-modal', $data);
     }
 }

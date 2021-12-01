@@ -30,6 +30,13 @@ class User extends Authenticatable
         'country',
     ];
 
+    public function playlists() {
+        return $this->hasMany('App\Models\Playlist');
+    }
+
+    public function liked() {
+        return $this->hasMany('App\Models\Like');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

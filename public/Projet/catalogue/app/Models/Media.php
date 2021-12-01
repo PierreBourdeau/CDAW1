@@ -22,4 +22,12 @@ class Media extends Model
     public function tags(){
         return $this->hasMany('App\Models\Tag');
     }
+    
+    public function playlists() {
+        return $this->belongsToMany('App\Models\Playlist');
+    }
+
+    public function liked() {
+        return $this->hasMany('App\Models\Like');
+    }
 }
