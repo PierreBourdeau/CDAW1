@@ -89,6 +89,16 @@ class UserController extends Controller
         return view('partials.playlist-list', $data);
     }
 
+    public function deletePlaylist(Request $request) {
+        $request->validate([
+            'playlist_id' => 'required',
+        ]);
+        $user = Auth::user();
+        Playlist::findOrFail($request->input('playlist_id'))->delete();
+        $data['user'] = $user;
+        return view('partials.playlist-list', $data);
+    }
+
     public function like(Request $request) {
         $request->validate([
             'media_id' => 'required'
@@ -132,5 +142,19 @@ class UserController extends Controller
         $data['user'] = Auth::user();
         $data['media'] = $media_id;
         return view('partials.add-to-playlist-modal', $data);
+    }
+
+    public function postComment(Request $request) {
+        $request->validate([
+            'media_id' => 'required',
+            "comment" => 'required',
+        ]);
+        $user = Auth::user();
+        $comment = $user->comments()->create([
+            'media_id' => $request->input('media_id'),
+            'comment' => $request->input('comment'),
+        ]);
+        $data['comment'] = $comment;
+        return view('partials.comment', $data);
     }
 }

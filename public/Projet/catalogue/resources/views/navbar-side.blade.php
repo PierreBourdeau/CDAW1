@@ -3,10 +3,15 @@
     <div class="container-fluid text-center">
         <ul class=" nav flex-column navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fas fa-list-ol"></i> Series</a>
+                <a class="nav-link" href="{{route('front.index', ['content' => 'home'])}}"> <i class="fas fa-home"></i>
+                    {{__('Home')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fas fa-film"></i> Films</a>
+                <a class="nav-link" href="#"> <i class="fas fa-list-ol"></i> {{__('Series')}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('front.index', ['content' => 'movies'])}}"> <i
+                        class="fas fa-film"></i> {{__('Movies')}}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"> <i class="fas fa-book-open"></i> Mangas</a>
@@ -19,15 +24,7 @@
             <hr />
         </div>
         <h5 class="px-2 text-light">Tags</h5>
-        <div class="d-flex flex-wrap">
-            <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Action</button>
-            <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Love</button>
-            <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Christmas</button>
-            <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Western</button>
-            <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Shonen</button>
-            <button type="button" class="tag_a btn btn-primary btn-sm"><i class="fas fa-plus"></i> Suspense</button>
-            <a class="w-100 px-2" href="#">Show more...</a>
-        </div>
+        @includeif('partials.tags-list')
         <div class="container-fluid">
             <hr />
         </div>
@@ -54,7 +51,7 @@
         <div class="container-fluid">
             <hr />
         </div>
-        <button class="button-style-less" onclick="getSwiper(this);">
+        <button class="button-style-less" onclick="getLikedList();">
             <h5 class="px-2 text-light">{{__('Liked')}}</h5>
         </button>
         <div id="nav-liked-list">

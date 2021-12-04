@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['setlang'])->group(function () {
-    Route::get('/', 'Front\FrontendController@index')->name('front.index');
-});
-Route::get('/media/{id}', 'Front\FrontendController@getMedia')->name('get-media');
+
 Route::get('/changelanguage/{lang}/{type?}', 'Front\FrontendController@changeLanguage')->name('changeLanguage');
 
 /*=======================================================
@@ -50,11 +47,14 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], funct
     Route::get('/logout', 'User\LoginController@logout')->name('user-logout');
     Route::get('/dashboard/form/{name}', 'Front\FrontendController@addContentForm')->name('user-dashboard-form');
     Route::post('/playlist', 'User\UserController@createPlaylist')->name('create-playlist');
+    Route::post('/playlist/delete', 'User\UserController@deletePlaylist')->name('delete-playlist');
     Route::post('/playlist/add/media', 'User\UserController@addMediaToPlaylist')->name('add-to-playlist');
     Route::post('/playlist/remove/media', 'User\UserController@removeMediaFromPlaylist')->name('remove-from-playlist');
     Route::post('/like', 'User\UserController@like')->name('media-like');
+    Route::get('/likes', 'Front\FrontendController@getLikes')->name('get-likes');
     Route::get('/list/playlists/add/{media_id}', 'User\UserController@addToPlaylistList')->name('get-add-to-playlist');
-    Route::get('/swiper/{id}', 'Front\FrontendController@getSwiper')->name('get-swiper');
+    Route::get('/playlist/{id}', 'Front\FrontendController@getPlaylist')->name('get-playlist');
+    Route::post('/post/comment', 'User\UserController@postComment')->name('post-comment');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], function () {
@@ -62,4 +62,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], funct
     Route::post('/edit', 'Admin\AdminController@editMedia')->name('media-edit-form');
     Route::post('/create', 'Admin\AdminController@createMedia')->name('media-create');
     Route::post('/delete', 'Admin\AdminController@deleteMedia')->name('media-delete');
+    Route::get('/manage/comments', 'Admin\AdminController@manageComments')->name('manage-comments');
+    Route::post('/delete/comment', 'Admin\AdminController@deleteComment')->name('delete-comment');
+    Route::post('/validate/comment', 'Admin\AdminController@validateComment')->name('validate-comment');
+});
+
+Route::middleware(['setlang'])->group(function () {
+    Route::get('/media/{id}', 'Front\FrontendController@getMedia')->name('get-media');
+    Route::get('/', function () {return redirect('/home');});
+    Route::get('/{content}/{tag?}', 'Front\FrontendController@index')->name('front.index');
 });

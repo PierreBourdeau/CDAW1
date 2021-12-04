@@ -3,28 +3,28 @@
 @section('content')
 <div class="d-flex flex-fill flex-column py-5 px-4 container-lg" style="min-height: 0px;overflow-y: auto;">
     @if ($user->role == 'admin')
-    <div class="row ">
-        <div class="col-md mb-5">
+    <div class="row row-cols-md-3">
+        <div class="col-md mb-5 text-center">
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-film"></i>
             </div>
             <h2>{{__('Movie')}}</h2>
             <p>{{__('Add a film to the database providing all the associated datas.')}}</p>
             <button id="addMovieBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
-                Add movie
+                {{__('Add movie')}}
             </button>
         </div>
-        <div class="col-md mb-5">
+        <div class="col-md mb-5 text-center">
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-list-ol"></i>
             </div>
             <h2>{{__('Serie')}}</h2>
             <p>{{__('Add a serie to the database providing all the associated datas.')}}</p>
             <button id="addSerieBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
-                Add Serie
+                {{__('Add serie')}}
             </button>
         </div>
-        <div class="col-md mb-5">
+        <div class="col-md mb-5 text-center">
             <div class="feature-icon bg-primary bg-gradient">
                 <i class="fas fa-book"></i>
             </div>
@@ -32,8 +32,19 @@
             <p>{{__('Add a book or a book serie to the database like : mangas, novel... providing all the associated datas')}}
             </p>
             <button id="addBookBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
-                Add book
+                {{__('Add book')}}
             </button>
+        </div>
+        <div class="col-md mb-5 text-center">
+            <div class="feature-icon bg-primary bg-gradient">
+                <i class="far fa-comment-dots"></i>
+            </div>
+            <h2>{{__('Manage comments')}}</h2>
+            <p>{{__('See all comments to manage them')}}
+            </p>
+            <a href="{{route('manage-comments')}}" id="manageCommentsBtn" class="btn btn-primary">
+                {{__('Manage comments')}}
+            </a>
         </div>
     </div>
     @endif

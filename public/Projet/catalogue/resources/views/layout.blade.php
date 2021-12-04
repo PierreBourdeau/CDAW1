@@ -60,6 +60,30 @@
         @includeif('navbar-top')
         @yield('content')
     </div>
+    <!-- Modal -->
+    <div class="modal fade black-modal" id="playlistDeleteConfirmationModal" tabindex="-1"
+        aria-labelledby="playlistDeleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="playlistDeleteConfirmationModalLabel">{{__('Confirm')}}</h5>
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i
+                            class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>
+                        {{__('Do you really want to delete the playlist ? ')}}
+                        <strong id="deletePlaylistName"></strong>
+                    </p>
+                    <form id="deletePlaylistForm" method="POST" action="{{route('delete-playlist')}}">
+                        <input type="hidden" name="playlist_id" readonly required />
+                        <button data-bs-target="#playlistDeleteConfirmationModal" data-bs-toggle="modal" type="submit"
+                            class="btn btn-success"><i class="fas fa-check"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         "use strict";
         var mainurl = "{{url('/')}}";
@@ -78,6 +102,38 @@
     </script>
 
     <script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>
+    <script>
+        function deletePlaylist(element) {
+            $('#deletePlaylistForm input[name="playlist_id"]').val($(element).data('id'));
+            $('#playlistDeleteConfirmationModal .modal-body #deletePlaylistName').html($(element).data('playlist'));
+            $('#playlistDeleteConfirmationModal').modal('show');
+        }
+    </script>
+    <script>
+        $(document).on('submit', '#deletePlaylistForm', (e) => {
+            e.preventDefault();
+            let fd = new FormData(document.getElementById('deletePlaylistForm'));
+            $.ajax({
+                url: "{{ route('delete-playlist') }}",
+                method: 'POST',
+                data: fd,
+                processData: false,
+                contentType: false,
+                error: (resp) => {
+                    console.log("err");
+                },
+                beforeSend: () => {
+                    $(".preloader").fadeIn();
+                },
+                complete: () => {
+                    $('.preloader').fadeOut();
+                },
+                success: (playlistList) => {
+                    $('#nav-playlists-list').html(playlistList);
+                }
+            })
+        })
+    </script>
     <script>
         function displayMediaModal(id) {
             let getUrl = "{{route('get-media', ['id' => ':id'])}}";
@@ -130,15 +186,70 @@
         })
     </script>
     <script>
-        function getSwiper(element) {
-            let getUrl = "{{route('get-swiper', ['id' => ':id'])}}";
-            if ($(element).data('id') && $(element).data('count') > 0) {
-                getUrl = getUrl.replace(':id', $(element).data('id'));
-            } else if ($(element).data('id') && $(element).data('count') == 0) {
-                return false;
-            } else {
-                getUrl = getUrl.replace(':id', 'like');
-            }
+        function getLikedList() {
+            $.ajax({
+                url: '{{route("get-likes")}}',
+                method: 'get',
+                error: (resp) => {
+                    console.log("err");
+                },
+                beforeSend: () => {
+                    $(".preloader").fadeIn();
+                },
+                complete: () => {
+                    $('.preloader').fadeOut();
+                },
+                success: (swiper) => {
+                    $('#content-container').prepend(swiper);
+                    new Swiper(".swiper", {
+                        slidesPerView: "auto",
+                        spaceBetween: 30,
+                        loop: false,
+                        slidesPerGroup: 1,
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+    <script>
+        function getPlaylist(element) {
+            let getUrl = "{{route('get-playlist', ['id' => ':id'])}}";
+            getUrl = getUrl.replace(':id', $(element).data('id'));
+            $.ajax({
+                url: getUrl,
+                method: "get",
+                error: (resp) => {
+                    console.log("err");
+                },
+                beforeSend: () => {
+                    $(".preloader").fadeIn();
+                },
+                complete: () => {
+                    $('.preloader').fadeOut();
+                },
+                success: (swiper) => {
+                    $('#content-container').prepend(swiper);
+                    new Swiper(".swiper", {
+                        slidesPerView: "auto",
+                        spaceBetween: 30,
+                        loop: false,
+                        slidesPerGroup: 1,
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+    <script>
+        function getTagSwiper(element) {
+            getUrl = window.location.href + '/' + $(element).data('tag');
             $.ajax({
                 url: getUrl,
                 method: 'get',
@@ -151,12 +262,12 @@
                 complete: () => {
                     $('.preloader').fadeOut();
                 },
-                success: (playlistSwiper) => {
-                    $('#content-container').prepend(playlistSwiper);
+                success: (swiper) => {
+                    $('#content-container').prepend(swiper);
                     new Swiper(".swiper", {
                         slidesPerView: "auto",
                         spaceBetween: 30,
-                        loop: true,
+                        loop: false,
                         slidesPerGroup: 1,
                         navigation: {
                             nextEl: ".swiper-button-next",
@@ -166,6 +277,33 @@
                 }
             })
         }
+    </script>
+    <script>
+        $(document).on('submit', '#postComment', (e) => {
+            e.preventDefault();
+            let fd = new FormData(document.getElementById('postComment'));
+            fd.append('comment', $('#postComment textarea').val());
+            $.ajax({
+                url: '{{route("post-comment")}}',
+                method: 'post',
+                data: fd,
+                processData: false,
+                contentType: false,
+                error: (resp) => {
+                    console.log("err");
+                },
+                beforeSend: () => {
+                    $(".preloader").fadeIn();
+                },
+                complete: () => {
+                    $('.preloader').fadeOut();
+                },
+                success: (comment) => {
+                    $('#pending-comments').prepend(comment);
+                    $('#postComment textarea').val('');
+                }
+            })
+        })
     </script>
 </body>
 

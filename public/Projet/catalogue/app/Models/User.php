@@ -37,6 +37,10 @@ class User extends Authenticatable
     public function liked() {
         return $this->hasMany('App\Models\Like');
     }
+
+    public function comments() {
+        return $this->hasMany('App\Models\Comment');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -199,3 +199,9 @@
   background: none;
   border: none;
 }
+.playlistBtnContainer .deletePlaylistBtn {
+  display: none;
+}
+.playlistBtnContainer:hover .deletePlaylistBtn {
+  display: inline-block;
+}

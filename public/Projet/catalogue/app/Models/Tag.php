@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable =[
         'name'
     ];
-    public function media(){
-        return $this->belongsTo('App\Models\Media');
+    public function medias() {
+        return $this->belongsToMany('App\Models\Media');
     }
 }

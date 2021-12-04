@@ -64,22 +64,54 @@ class DatabaseSeeder extends Seeder
         $api_result = file_get_contents('https://imdb-api.com/en/API/InTheaters/k_rapxhaf0'); 
         $contents = json_decode($api_result);
 
-        for($i = 0; $i < 5; $i++) {
+        foreach($contents->items as $key=>$content) {
 
             //add a movie and it's associated media
             $movie = new \App\Models\Movie;
-            $movie->length = $contents->items[$i]->runtimeStr;
-            $movie->cast = $contents->items[$i]->stars;
+            $movie->length = $content->runtimeStr;
+            $movie->cast = $content->stars;
             $movie->save();
-            $image = pathinfo($contents->items[$i]->image)['basename'];
-            $movie->media()->create([
-                'title' => $contents->items[$i]->title,
-                'year' => $contents->items[$i]->year,
+            $image = pathinfo($content->image)['basename'];
+            $media = $movie->media()->create([
+                'title' => $content->title,
+                'year' => $content->year,
                 'image' => $image,
-                'creator' => $contents->items[$i]->directors,
-                'description' => $contents->items[$i]->plot,
+                'creator' => $content->directors,
+                'description' => $content->plot,
             ]);
-            file_put_contents('public/front/img/media/'.$image, file_get_contents($contents->items[$i]->image));
+            foreach($content->genreList as $tag) {
+                $tag = \App\Models\Tag::firstOrCreate([
+                'name' => $tag->value,
+                ]);
+                $media->tags()->attach($tag);
+            }
+            file_put_contents('public/front/img/media/'.$image, file_get_contents($content->image));
+        }
+        //Populate database with ImDB datas - MostPopularTVs API
+        $api_result = file_get_contents('https://imdb-api.com/en/API/MostPopularTVs/k_rapxhaf0'); 
+        $contents = json_decode($api_result);
+        foreach($contents->items as $key=>$content) {
+
+            //add a serie and it's associated media
+            $serie = new \App\Models\Movie;
+            $serie->length = $content->runtimeStr;
+            $serie->cast = $content->stars;
+            $serie->save();
+            $image = pathinfo($content->image)['basename'];
+            $media = $movie->media()->create([
+                'title' => $content->title,
+                'year' => $content->year,
+                'image' => $image,
+                'creator' => $content->directors,
+                'description' => $content->plot,
+            ]);
+            foreach($content->genreList as $tag) {
+                $tag = \App\Models\Tag::firstOrCreate([
+                'name' => $tag->value,
+                ]);
+                $media->tags()->attach($tag);
+            }
+            file_put_contents('public/front/img/media/'.$image, file_get_contents($content->image));
         }
     }
 }

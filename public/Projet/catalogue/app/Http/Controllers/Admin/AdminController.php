@@ -11,6 +11,7 @@ use DB;
 use App;
 use App\Models\Media;
 use App\Models\Movie;
+use App\Models\Comment;
 use Session;
 
 class AdminController extends Controller
@@ -108,6 +109,27 @@ class AdminController extends Controller
         }
         $movie = $media->getMedia()->delete();
         $media->delete();
+        return back();
+    }
+
+    public function manageComments() {
+        $data['comments'] = Comment::where('status', 'P')->get();
+        return view('user.comments-management', $data);
+    }
+    public function deleteComment(Request $request) {
+        $request->validate([
+            'comment_id' => 'required',
+        ]);
+        Comment::findOrFail($request->input('comment_id'))->delete();
+        return back();
+    }
+    public function validateComment(Request $request) {
+        $request->validate([
+            'comment_id' => 'required',
+        ]);
+        $comment = Comment::findOrFail($request->input('comment_id'));
+        $comment->status = 'A';
+        $comment->save();
         return back();
     }
 }

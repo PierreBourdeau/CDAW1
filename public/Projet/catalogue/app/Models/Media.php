@@ -20,13 +20,15 @@ class Media extends Model
         return $this->morphTo(__FUNCTION__, 'media_type', 'media_id');
     }
     public function tags(){
-        return $this->hasMany('App\Models\Tag');
+        return $this->belongsToMany('App\Models\Tag');
     }
     
     public function playlists() {
         return $this->belongsToMany('App\Models\Playlist');
     }
-
+    public function comments() {
+        return $this->hasMany('App\Models\Comment');
+    }
     public function liked() {
         return $this->hasMany('App\Models\Like');
     }

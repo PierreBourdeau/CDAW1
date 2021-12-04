@@ -72,6 +72,46 @@
                     <div><strong class="me-2">{{__("Casting")}} :</strong>{{$media->getMedia->cast}}</div>
                 </div>
                 @endif
+                <div class="accordion mt-3" id="commentsAccordion">
+                    <div class="accordion-item bg-transparent">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                {{__('Comments').' ('. $media->comments()->where('status', 'A')->count().')'}}
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#commentsAccordion">
+                            <div class="accordion-body">
+                                <div class="mb-3">
+                                    <form id="postComment">
+                                        @csrf
+                                        <input type="hidden" name="media_id" value="{{$media->id}}" readonly required />
+                                        <label for="exampleFormControlTextarea1"
+                                            class="form-label">{{__('Write comment :')}}</label>
+                                        <textarea required class="form-control bg-transparent text-light"
+                                            id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <div class="text-end">
+                                            <button type="submit" class="mt-2 btn btn-primary btn-sm"> <i
+                                                    class="fas fa-paper-plane"></i> {{__('Send')}}</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="pending-comments">
+                                    @foreach(Auth::user()->comments->where('status', 'P')->where('media_id', $media->id)
+                                    as $selfComment)
+                                    @includeif('partials.comment', ['comment' => $selfComment])
+                                    @endforeach
+                                </div>
+                                <div id="comments-area">
+                                    @foreach($media->comments->where('status', 'A') as $comment)
+                                    @includeif('partials.comment', ['comment' => $comment])
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             @auth
             @if (auth()->user()->role == 'admin')
