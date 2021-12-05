@@ -7,7 +7,10 @@
                 <div class='swiper-slide tile-{{$key}}'>
                     <button type="button" onclick="displayMediaModal({{$media->id}})" id="tile-btn-{{$key}}"
                         class="button-style-less w-100">
-                        <img src='{{asset("/front/img/media/".$media["image"])}}' />
+                        <img src='{{asset("/front/img/media/".$media["image"])}}' class="swiper-lazy" />
+                        <div class="swiper-lazy-preloader">
+
+                        </div>
                     </button>
                 </div>
                 @endforeach

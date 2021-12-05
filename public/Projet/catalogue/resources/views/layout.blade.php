@@ -22,17 +22,6 @@
     <!--====== jQuery =========-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    @if (count($langs) == 0)
-    <style media="screen">
-        .support-bar-area ul.social-links li:last-child {
-            margin-right: 0px;
-        }
-
-        .support-bar-area ul.social-links::after {
-            display: none;
-        }
-    </style>
-    @endif
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -44,6 +33,15 @@
 
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
+    <!--====== jQuery UI =========-->
+    <link rel="stylesheet" type="text/css" href="{{asset('front/style/jquery-ui.min.css')}}" />
+    <script src="{{asset('front/js/jquery-ui.min.js')}}"></script>
+
+    <style>
+        .ui-autocomplete {
+            z-index: 1100;
+        }
+    </style>
 </head>
 
 <body>
@@ -205,6 +203,9 @@
                         slidesPerView: "auto",
                         spaceBetween: 30,
                         loop: false,
+                        preloadImages: false,
+                        lazy: true,
+                        watchSlidesProgress: true,
                         slidesPerGroup: 1,
                         navigation: {
                             nextEl: ".swiper-button-next",
@@ -238,6 +239,9 @@
                         spaceBetween: 30,
                         loop: false,
                         slidesPerGroup: 1,
+                        preloadImages: false,
+                        lazy: true,
+                        watchSlidesProgress: true,
                         navigation: {
                             nextEl: ".swiper-button-next",
                             prevEl: ".swiper-button-prev",
@@ -269,6 +273,9 @@
                         spaceBetween: 30,
                         loop: false,
                         slidesPerGroup: 1,
+                        preloadImages: false,
+                        lazy: true,
+                        watchSlidesProgress: true,
                         navigation: {
                             nextEl: ".swiper-button-next",
                             prevEl: ".swiper-button-prev",
@@ -303,6 +310,26 @@
                     $('#postComment textarea').val('');
                 }
             })
+        })
+    </script>
+    <script>
+        $('#mediaSearchBar').autocomplete({
+            delay: 500,
+            minLength: 2,
+            source: function (req, resp) {
+                $.post("{{route('search-media')}}", { q: req.term }, function (datas) {
+                    resp($.map(datas, function (value, key) {
+                        return {
+                            label: value.title,
+                            value: value.id
+                        }
+                    }));
+                })
+            },
+            select: function (event, ui) {
+                displayMediaModal(ui.item.value);
+                return false;
+            }
         })
     </script>
 </body>

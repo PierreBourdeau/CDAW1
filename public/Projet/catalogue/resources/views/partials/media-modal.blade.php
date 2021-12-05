@@ -3,7 +3,11 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="mediaModalLabel">{{$media->title}}</h5>
+                @php
+                $media_type = explode("\\", $media->media_type);
+                $media_type = array_pop($media_type);
+                @endphp
+                <h5 class="modal-title" id="mediaModalLabel">{{__($media_type).' - '}}{{$media->title}}</h5>
                 <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fas fa-times"></i></button>
             </div>
@@ -41,9 +45,11 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col flex-column d-flex">
+                        @if(isset($media->creator))
                         <span><strong>{{__('Creator')}} :</strong>
                             <span id="mediaModalCreator">{{$media->creator}}</span>
                         </span>
+                        @endif
                         <span><strong>{{__('Year')}} :</strong>
                             <span id="mediaModalYear">{{$media->year}}</span>
                         </span>
@@ -54,6 +60,7 @@
                                 class="fas fa-heart text-danger"></i></span>
                     </div>
                 </div>
+                @if(isset($media->description))
                 <div class="row mt-3">
                     <div class="col d-flex flex-column">
                         <strong>{{__('Description')}}</strong>
@@ -62,13 +69,16 @@
                         </p>
                     </div>
                 </div>
-                @php
-                $media_type = explode("\\", $media->media_type);
-                $media_type = array_pop($media_type);
-                @endphp
+                @endif
                 @if($media_type == 'Movie')
                 <div class="row" id="mediaModalContent">
                     <div><strong class="me-2">{{__("Length")}} :</strong>{{$media->getMedia->length}}</div>
+                    <div><strong class="me-2">{{__("Casting")}} :</strong>{{$media->getMedia->cast}}</div>
+                </div>
+                @endif
+                @if($media_type == 'Serie')
+                <div class="row" id="mediaModalContent">
+                    <div><strong class="me-2">{{__("Seasons")}} :</strong>{{$media->getMedia->seasons}}</div>
                     <div><strong class="me-2">{{__("Casting")}} :</strong>{{$media->getMedia->cast}}</div>
                 </div>
                 @endif
@@ -97,12 +107,14 @@
                                         </div>
                                     </form>
                                 </div>
+                                @auth
                                 <div id="pending-comments">
                                     @foreach(Auth::user()->comments->where('status', 'P')->where('media_id', $media->id)
                                     as $selfComment)
                                     @includeif('partials.comment', ['comment' => $selfComment])
                                     @endforeach
                                 </div>
+                                @endauth
                                 <div id="comments-area">
                                     @foreach($media->comments->where('status', 'A') as $comment)
                                     @includeif('partials.comment', ['comment' => $comment])

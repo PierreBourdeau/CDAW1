@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], funct
     Route::post('/edit', 'Admin\AdminController@editMedia')->name('media-edit-form');
     Route::post('/create', 'Admin\AdminController@createMedia')->name('media-create');
     Route::post('/delete', 'Admin\AdminController@deleteMedia')->name('media-delete');
-    Route::get('/manage/comments', 'Admin\AdminController@manageComments')->name('manage-comments');
+    Route::get('/manage/comments/{status}', 'Admin\AdminController@manageComments')->name('manage-comments');
     Route::post('/delete/comment', 'Admin\AdminController@deleteComment')->name('delete-comment');
     Route::post('/validate/comment', 'Admin\AdminController@validateComment')->name('validate-comment');
 });
@@ -70,5 +70,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], funct
 Route::middleware(['setlang'])->group(function () {
     Route::get('/media/{id}', 'Front\FrontendController@getMedia')->name('get-media');
     Route::get('/', function () {return redirect('/home');});
+    Route::post('/search', 'Front\FrontendController@searchMedia')->name('search-media');
     Route::get('/{content}/{tag?}', 'Front\FrontendController@index')->name('front.index');
 });

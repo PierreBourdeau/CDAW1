@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LanguageSeeder extends Seeder
 {
@@ -13,6 +14,21 @@ class LanguageSeeder extends Seeder
      */
     public function run()
     {
-        
+        //Create default english language
+        $defaultLang = DB::table('languages')->insertGetId([
+            'name' => "english",
+            'is_default' => 1,
+            'rtl' => 0,
+            'code' => 'en'
+        ]);
+        //Create default french language
+        DB::table('languages')->insert([
+            'name' => 'french',
+            'is_default' => 0,
+            'rtl' => 0,
+            'code' => 'fr'
+        ]);
+
+        $this->callWith(BasicSettingsSeeder::class, ['defaultLang' => $defaultLang]);
     }
 }

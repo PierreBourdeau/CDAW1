@@ -42,7 +42,8 @@
             <h2>{{__('Manage comments')}}</h2>
             <p>{{__('See all comments to manage them')}}
             </p>
-            <a href="{{route('manage-comments')}}" id="manageCommentsBtn" class="btn btn-primary">
+            <a href="{{route('manage-comments', ['status' => 'pending'])}}" id="manageCommentsBtn"
+                class="btn btn-primary">
                 {{__('Manage comments')}}
             </a>
         </div>

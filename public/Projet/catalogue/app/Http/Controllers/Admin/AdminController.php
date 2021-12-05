@@ -112,8 +112,13 @@ class AdminController extends Controller
         return back();
     }
 
-    public function manageComments() {
-        $data['comments'] = Comment::where('status', 'P')->get();
+    public function manageComments($status) {
+        if($status == 'pending') {
+            $data['comments'] = Comment::where('status', 'P')->get();
+        } else if ($status == 'accepted') {
+            $data['comments'] = Comment::where('status', 'A')->get();
+        }
+        $data['status'] = $status;
         return view('user.comments-management', $data);
     }
     public function deleteComment(Request $request) {

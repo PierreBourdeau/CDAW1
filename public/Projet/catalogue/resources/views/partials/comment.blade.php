@@ -7,7 +7,7 @@
         @endif
     </div>
     <div>
-        <p class="d-flex flex-column"><strong class="me-1">
+        <p class="d-flex flex-column"><strong class="me-1 comment-username">
                 {{$comment->user->username}}
                 @if($comment->status == 'P')
                 <span class="badge bg-warning text-dark">{{__('Pending')}}</span>

@@ -7,7 +7,8 @@
                     {{__('Home')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fas fa-list-ol"></i> {{__('Series')}}</a>
+                <a class="nav-link" href="{{route('front.index', ['content' => 'series'])}}"> <i
+                        class="fas fa-list-ol"></i> {{__('Series')}}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('front.index', ['content' => 'movies'])}}"> <i

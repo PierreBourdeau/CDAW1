@@ -35,11 +35,11 @@ class FrontendController extends Controller
 
         if($content == 'home') {
             if (isset($tag)) {
-                 $data['medias'] = Tag::where('name', $tag)->first()->medias()->select('id','image')->get();
+                 $data['medias'] = Tag::where('name', $tag)->first()->medias()->select('id','image','media_type')->get();
                  $data['title'] = $tag;
                  return view('partials.swiper', $data);               
             } else {
-            $data['medias'] = Media::select('id','image')->get();
+            $data['medias'] = Media::select('id','image', 'media_type')->get();
             $data['tags'] = Tag::get();
             }
         } else if ($content == 'movies') {
@@ -48,9 +48,20 @@ class FrontendController extends Controller
                 $data['title'] = $tag.' '.__('Movies');
                 return view('partials.swiper', $data);
             } else {
-                $data['medias'] = Media::where('media_type', 'App\Models\Movie')->select('id','image')->get();
+                $data['medias'] = Media::where('media_type', 'App\Models\Movie')->select('id','image','media_type')->get();
                 $data['tags'] = Tag::whereHas('medias', function($query) {
                     $query->where('media_type', 'App\Models\Movie');
+                })->get();
+            }
+        } else if ($content == 'series') {
+            if (isset($tag)) {
+                $data['medias'] = Tag::where('name', $tag)->first()->medias()->where('media_type', 'App\Models\Serie')->get();
+                $data['title'] = $tag.' '.__('Series');
+                return view('partials.swiper', $data);
+            } else {
+                $data['medias'] = Media::where('media_type', 'App\Models\Serie')->select('id','image','media_type')->get();
+                $data['tags'] = Tag::whereHas('medias', function($query) {
+                    $query->where('media_type', 'App\Models\Serie');
                 })->get();
             }
         }        
@@ -92,5 +103,15 @@ class FrontendController extends Controller
         }
         $data['title'] = __('Like');
         return view('partials.swiper', $data);
+    }
+
+    public function searchMedia(Request $request) {
+        if($request->has('q')) {
+            $search = $request->q;
+            $medias = Media::select('id','title')->where('title', 'LIKE', "%{$search}%")->get();
+            return response()->json($medias);
+        } else {
+            return response()->json('error');
+        }
     }
 }

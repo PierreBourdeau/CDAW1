@@ -26,8 +26,8 @@
                 @endif
             </ul>
             <form class="d-flex me-auto ms-auto">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Search</button>
+                <input class="form-control me-2" type="search" id="mediaSearchBar" placeholder="{{__('Search')}}"
+                    aria-label="Search">
             </form>
             @guest
             <ul class="login navbar-nav mb-2 mb-lg-0">
