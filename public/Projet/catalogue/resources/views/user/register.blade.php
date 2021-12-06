@@ -46,29 +46,6 @@
                         </div>
                     </div>
                     <div class="mb-3">
-<<<<<<< HEAD
-=======
-                        <div class="form-check form-check-inline">
-                            <input required name="gender" class="form-check-input" type="radio"
-                                name="inlineRadioOptions" id="inlineRadio1" value="men">
-                            <label class="form-check-label" for="inlineRadio1">{{__('Men')}}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input required name="gender" class="form-check-input" type="radio"
-                                name="inlineRadioOptions" id="inlineRadio2" value="woman">
-                            <label class="form-check-label" for="inlineRadio2">{{__('Woman')}}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input required name="gender" class="form-check-input" type="radio"
-                                name="inlineRadioOptions" id="inlineRadio3" value="other">
-                            <label class="form-check-label" for="inlineRadio3">{{__('Other')}}</label>
-                        </div>
-                        @if ($errors->has('gender'))
-                        <p class="text-danger mb-0 mt-2">{{$errors->first('gender')}}</p>
-                        @endif
-                    </div>
-                    <div class="mb-3">
->>>>>>> 1b2a75c41e2c150dd414ec4f6a1337a9e18dbfea
                         <!--<label for="floatingInput">Email address</label>-->
                         <div class="form-floating">
                             <input required name="email" type="email" class="form-control" id=" floatingInput"
