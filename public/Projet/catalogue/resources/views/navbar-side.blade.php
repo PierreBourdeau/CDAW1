@@ -15,16 +15,15 @@
                         class="fas fa-film"></i> {{__('Movies')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"> <i class="fas fa-book-open"></i> Mangas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"> <i class="fas fa-pencil-alt"></i> Cartoons</a>
+                <a class="nav-link" href="{{route('front.index', ['content' => 'seen'])}}"><i
+                        class="fas fa-check-square"></i>
+                    {{__('Seen')}}</a>
             </li>
         </ul>
         <div class="container-fluid">
             <hr />
         </div>
-        <h5 class="px-2 text-light">Tags</h5>
+        <h5 class="px-2 text-light">{{__('Tags')}}</h5>
         @includeif('partials.tags-list')
         <div class="container-fluid">
             <hr />
@@ -32,7 +31,7 @@
         @auth
         <div>
             <div class="d-flex align-items-baseline justify-content-center">
-                <h5 class="px-2 text-light">Playlists</h5>
+                <h5 class="px-2 text-light">{{__('Playlists')}}</h5>
                 <a class="badge bg-primary rounded-pill" data-bs-toggle="collapse" href="#playlistCollapse"
                     role="button" aria-expanded="false" aria-controls="playlistCollapse">
                     <i class="fas fa-plus text-light"></i> </a>

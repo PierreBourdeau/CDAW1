@@ -82,6 +82,9 @@
             </div>
         </div>
     </div>
+
+    @includeif('partials.add-to-seen-modal')
+
     <script>
         "use strict";
         var mainurl = "{{url('/')}}";
@@ -314,7 +317,7 @@
     </script>
     <script>
         $('#mediaSearchBar').autocomplete({
-            delay: 500,
+            delay: 10,
             minLength: 2,
             source: function (req, resp) {
                 $.post("{{route('search-media')}}", { q: req.term }, function (datas) {
@@ -331,6 +334,12 @@
                 return false;
             }
         })
+    </script>
+    <script>
+        function displayAddToSeenModal(element) {
+            $('#addToSeenListModal input[name="media_id"]').val($(element).data('media'));
+            $('#addToSeenListModal').modal('show');
+        }
     </script>
 </body>
 

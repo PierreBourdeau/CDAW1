@@ -47,7 +47,6 @@ class RegisterController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             'birth' => 'required|date',
-            'gender' => 'required'
         ];
 
         $request->validate($rules);

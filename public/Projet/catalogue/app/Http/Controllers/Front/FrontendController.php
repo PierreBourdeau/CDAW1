@@ -44,7 +44,7 @@ class FrontendController extends Controller
             }
         } else if ($content == 'movies') {
             if (isset($tag)) {
-                $data['medias'] = Tag::where('name', $tag)->first()->medias()->where('media_type', 'App\Models\Movie')->get();
+                $data['medias'] = Tag::where('name', $tag)->first()->medias()->where('media_type', 'App\Models\Movie')->select('id','image','media_type')->get();
                 $data['title'] = $tag.' '.__('Movies');
                 return view('partials.swiper', $data);
             } else {
@@ -62,6 +62,23 @@ class FrontendController extends Controller
                 $data['medias'] = Media::where('media_type', 'App\Models\Serie')->select('id','image','media_type')->get();
                 $data['tags'] = Tag::whereHas('medias', function($query) {
                     $query->where('media_type', 'App\Models\Serie');
+                })->get();
+            }
+        } else if ($content == 'seen') {
+            if (isset($tag)) {
+                $data['medias'] = Tag::where('name', $tag)->first()->medias()->whereHas('seen', function ($query) {
+                    $query->where('user_email', Auth::user()->email);
+                })->select('id','image', 'media_type')->get();
+                $data['title'] = $tag.' '.__('Seen');
+                return view('partials.swiper', $data);
+            } else {
+                $data['medias'] = Media::whereHas('seen', function ($query) {
+                    $query->where('user_email', Auth::user()->email);
+                })->select('id', 'image', 'media_type')->get();
+                $data['tags'] = Tag::whereHas('medias', function($query) {
+                    $query->whereHas('seen', function ($q) {
+                        $q->where('user_email', Auth::user()->email);
+                    });
                 })->get();
             }
         }        

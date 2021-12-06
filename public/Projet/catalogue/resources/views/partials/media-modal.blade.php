@@ -19,12 +19,12 @@
                 <div class="row mt-3">
                     <div class="col text-center">
                         @if(Auth::check())
-                        <button class="btn btn-primary" id="addToPlaylistBtn" data-media="{{$media->id}}"
+                        <button class="btn btn-primary btn-sm" id="addToPlaylistBtn" data-media="{{$media->id}}"
                             data-bs-target="#mediaModal" data-bs-toggle="modal">
                             <i class="far fa-plus-square"></i> {{__('Add to playlist')}}
                         </button>
                         @else
-                        <a class="btn btn-primary" href="{{route('user.login')}}">
+                        <a class="btn btn-primary btn-sm" href="{{route('user.login')}}">
                             <i class="far fa-plus-square"></i> {{__('Add to playlist')}}
                         </a>
                         @endif
@@ -33,7 +33,7 @@
                         <form id="likeForm" name="likeForm">
                             @csrf
                             <input type="hidden" name="media_id" value="{{$media->id}}" id="mediaModalLike" readonly>
-                            <button class="btn btn-danger" type="submit" id="mediaModalLikeBtn">
+                            <button class="btn btn-danger btn-sm" type="submit" id="mediaModalLikeBtn">
                                 @if(Auth::check() && Auth::user()->liked()->where('media_id', $media->id)->exists())
                                 <i class="fas fa-heart"></i>
                                 @else
@@ -41,6 +41,29 @@
                                 @endif
                             </button>
                         </form>
+                    </div>
+                    <div class="col text-center">
+                        @if(Auth::check())
+                        @if(!Auth::user()->seen->where('media_id', $media->id)->first()->exists())
+                        <button class="btn btn-sm btn-success" type="button" id="addToSeenListBtn"
+                            onclick="displayAddToSeenModal(this)" data-media="{{$media->id}}"
+                            data-bs-target="#mediaModal" data-bs-toggle="modal">
+                            <i class="fas fa-check"></i> {{__('Add to seen list')}}
+                        </button>
+                        @else
+                        <form method="POST" action="{{route('remove-from-seen')}}">
+                            @csrf
+                            <input type="hidden" name="media_id" value="{{$media->id}}" readonly required />
+                            <button class="btn btn-sm btn-danger" type="submit">
+                                <i class="far fa-minus-square"></i> {{__('Remove from seen list')}}
+                            </button>
+                        </form>
+                        @endif
+                        @else
+                        <a class="btn btn-sm btn-success" href="{{route('user.login')}}">
+                            <i class="fas fa-check"></i> {{__('Add to seen list')}}
+                        </a>
+                        @endif
                     </div>
                 </div>
                 <div class="row mt-3">

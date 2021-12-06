@@ -1,8 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
-/public/front/img/media/
-/public/front/img/user/
+/public/front/img/media/*
+/public/front/img/user/*
 /storage/*.key
 /vendor
 .env.backup
@@ -15,3 +15,6 @@ yarn-error.log
 /.idea
 /.vscode
 .env
+
+!/public/front/img/media/.gitkeep
+!/public/front/img/user/.gitkeep

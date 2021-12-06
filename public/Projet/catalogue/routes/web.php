@@ -55,6 +55,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'userstatus']], funct
     Route::get('/list/playlists/add/{media_id}', 'User\UserController@addToPlaylistList')->name('get-add-to-playlist');
     Route::get('/playlist/{id}', 'Front\FrontendController@getPlaylist')->name('get-playlist');
     Route::post('/post/comment', 'User\UserController@postComment')->name('post-comment');
+    Route::post('/seen/add', 'User\UserController@addToSeen')->name('add-to-seen');
+    Route::post('/seen/remove', 'User\UserController@removeFromSeen')->name('remove-from-seen');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'checkrole']], function () {

@@ -157,4 +157,26 @@ class UserController extends Controller
         $data['comment'] = $comment;
         return view('partials.comment', $data);
     }
+
+    public function addToSeen(Request $request) {
+        $request->validate([
+            'media_id' => 'required',
+            'date' => 'required|date',
+        ]);
+        $user = Auth::user();
+        $user->seen()->create([
+            'media_id' => $request->input('media_id'),
+            'date' => $request->input('date'),
+        ]);
+        return back();
+    }
+
+    public function removeFromSeen(Request $request) {
+        $request->validate([
+            'media_id' => 'required',
+        ]);
+        $user = Auth::user();
+        $user->seen()->where('media_id', $request->input('media_id'))->delete();
+        return back();
+    }
 }

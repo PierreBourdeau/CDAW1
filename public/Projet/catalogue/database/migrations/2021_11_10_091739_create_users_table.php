@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->date('birth');
-            $table->string('gender');
             $table->string('email');
             $table->primary('email'); // Set email (string) as primary key
             $table->string('photo')->nullable();

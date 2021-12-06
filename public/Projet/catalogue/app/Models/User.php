@@ -23,7 +23,6 @@ class User extends Authenticatable
         'lname',
         'email',
         'birth',
-        'gender',
         'photo',
         'username',
         'password',
@@ -40,6 +39,10 @@ class User extends Authenticatable
 
     public function comments() {
         return $this->hasMany('App\Models\Comment');
+    }
+
+    public function seen() {
+        return $this->hasMany('App\Models\Seen');
     }
     /**
      * The attributes that should be hidden for arrays.

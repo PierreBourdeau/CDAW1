@@ -32,4 +32,7 @@ class Media extends Model
     public function liked() {
         return $this->hasMany('App\Models\Like');
     }
+    public function seen() {
+        return $this->hasMany('App\Models\Seen');
+    }
 }
