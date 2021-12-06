@@ -9,7 +9,19 @@
 
 # :desktop_computer: - Understanding the application !
 
+## Table of content
+[0. Prerequesite](#prerequisite)  
+[1. Databases](#databases)  
+[2. Start app. with artisan serve](#start)  
+[3. Application default datas](#default-datas)  
+[4. Application presentation](#presentation)
+
+
+
+
 ## :rocket: - Starting the application
+
+<a name="prerequisite"></a>
 
 ### 0. Prerequisite
 Firt of all, you need to install Laravel environment.
@@ -21,7 +33,7 @@ Then run :
 
     composer install
 
-
+<a name="databases"></a>  
 
 ### 1. Databases
 The application handle database migrations and seeding.
@@ -36,12 +48,12 @@ Search for :
 
     DB_CONNECTION=mysql
     DB_HOST= _Your database host (localhost for local hosting)_
-    DB_PORT= _Your database port (default: 3306) _
+    DB_PORT= _Your database port (default: 3306)_
     DB_DATABASE= _Your newly created database name (ex: cdaw_project)_ 
     DB_USERNAME= _Your username_
     DB_PASSWORD= _Your password_
 
-**:pushpin: Comment : ** _The application is originally run on a Docker environment that can be replicated. For performance issues with Docker running on Windows computers, the project can be pulled on a local environment._
+**:pushpin: Comment :** _The application is originally run on a Docker environment that can be replicated. For performance issues with Docker running on Windows computers, the project can be pulled on a local environment._
 
 Run the following commands in terminal (from the root folder) :  
     
@@ -55,12 +67,16 @@ Then run (from the root folder) :
 
 > This will seed the database with the initial default datas and download medias pictures on the application server. (Fetching from [ImDB API](https://imdb-api.com/api))
 
+<a name="start"></a>  
+
 ### 2. Start app. with artisan serve
 In order to start the application, we need to use php artisan. Lauch the terminal command  (from the root folder) :  
     
     php public/Projet/catalogue/artisan serve
 
 Now you can access the application on : [localhost:8000](http://localhost:8000) by default.
+
+<a name="default-datas"></a>  
 
 ### 3. Application default datas
 The default database seeding add the following datas  :floppy_disk: :
@@ -80,27 +96,29 @@ The default database seeding add the following datas  :floppy_disk: :
 | Language id    | lang. id |
 | Website title      | UV CDAW  |
 
-> :file_folder: The application also contains plenty of pre-generated medias (Movies/Series) and their pictures stored on the application server. 
+> :file_folder:  The application also contains plenty of pre-generated medias (Movies/Series) and their pictures stored on the application server. 
+
+<a name="presentation"></a>  
 
 ### 4. Application presentation 
 
 #### General presentation
 
 The application is a media referencer that contain movies and series developped using [Laravel Framework](https://laravel.com/). The application handle functionnalities such as : 
-    - User authentification / roles / status with personal datas and user space.
-    - User personal information and secret informations editing
-    - Playlist of medias
-    - Media autocomplete searchbar
-    - User possibility to like a media to save it
-    - User dated seen list
-    - Tag identification and sorting on media
-    - Media type sorting and referencing
-    - Admin pannel to handle creation, deletion, edition of media
-    - Comments system with administration for admin and validation
-    - Responsive UI, mobile friendly, slider presentation
-    - Database migrations and seeding
-    - Translation (en/fr)
-    - ...
+* User authentification / roles / status with personal datas and user space.
+* User personal information and secret informations editing
+* Playlist of medias
+* Media autocomplete searchbar
+* User possibility to like a media to save it
+* User dated seen list
+* Tag identification and sorting on media
+* Media type sorting and referencing
+* Admin pannel to handle creation, deletion, edition of media
+* Comments system with administration for admin and validation
+* Responsive UI, mobile friendly, slider presentation
+* Database migrations and seeding
+* Translation (en/fr)
+* ...
 
 ## About Laravel
 
