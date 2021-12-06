@@ -15,16 +15,9 @@
                         class="fas fa-film"></i> {{__('Movies')}}</a>
             </li>
             <li class="nav-item">
-<<<<<<< HEAD
                 <a class="nav-link" href="{{route('front.index', ['content' => 'seen'])}}"><i
                         class="fas fa-check-square"></i>
                     {{__('Seen')}}</a>
-=======
-                <a class="nav-link"> <i class="fas fa-book-open"></i> {{__('Mangas')}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"> <i class="fas fa-pencil-alt"></i>{{__('Cartoons')}}</a>
->>>>>>> 1b2a75c41e2c150dd414ec4f6a1337a9e18dbfea
             </li>
         </ul>
         <div class="container-fluid">
