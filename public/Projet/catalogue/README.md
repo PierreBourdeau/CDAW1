@@ -26,6 +26,23 @@ Then run :
 ### 1. Databases
 The application handle database migrations and seeding.
 
+#### First of all verify database configuration
+
+In your environment, create the database that will be used by the pplication (MySQL relational database).
+
+Look for the `.env` file in the root folder.
+
+Search for :   
+
+    DB_CONNECTION=mysql
+    DB_HOST= _Your database host (localhost for local hosting)_
+    DB_PORT= _Your database port (default: 3306) _
+    DB_DATABASE= _Your newly created database name (ex: cdaw_project)_ 
+    DB_USERNAME= _Your username_
+    DB_PASSWORD= _Your password_
+
+**:pushpin: Comment : ** _The application is originally run on a Docker environment that can be replicated. For performance issues with Docker running on Windows computers, the project can be pulled on a local environment._
+
 Run the following commands in terminal (from the root folder) :  
     
     php public/Projet/catalogue/artisan migrate
@@ -36,7 +53,7 @@ Then run (from the root folder) :
     
     php public/Projet/catalogue/artisan db:seed
 
-> This will seed the database with the initial default datas
+> This will seed the database with the initial default datas and download medias pictures on the application server. (Fetching from [ImDB API](https://imdb-api.com/api))
 
 ### 2. Start app. with artisan serve
 In order to start the application, we need to use php artisan. Lauch the terminal command  (from the root folder) :  
@@ -60,18 +77,30 @@ The default database seeding add the following datas  :floppy_disk: :
 
 | Default settings | value  |
 | ------------- |:-------------:|
-| Language id    | english lang. id |
+| Language id    | lang. id |
 | Website title      | UV CDAW  |
 
+> :file_folder: The application also contains plenty of pre-generated medias (Movies/Series) and their pictures stored on the application server. 
 
-### 4. Application manipulations
+### 4. Application presentation 
 
-In order to reset all the database :  
-    
-    php public/Projet/catalogue/artisan migrate:refresh
+#### General presentation
 
-> This will delete then re-create all database tables. Don't forget to re-seed them.
-
+The application is a media referencer that contain movies and series developped using [Laravel Framework](https://laravel.com/). The application handle functionnalities such as : 
+    - User authentification / roles / status with personal datas and user space.
+    - User personal information and secret informations editing
+    - Playlist of medias
+    - Media autocomplete searchbar
+    - User possibility to like a media to save it
+    - User dated seen list
+    - Tag identification and sorting on media
+    - Media type sorting and referencing
+    - Admin pannel to handle creation, deletion, edition of media
+    - Comments system with administration for admin and validation
+    - Responsive UI, mobile friendly, slider presentation
+    - Database migrations and seeding
+    - Translation (en/fr)
+    - ...
 
 ## About Laravel
 
