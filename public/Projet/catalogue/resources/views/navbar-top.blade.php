@@ -19,7 +19,8 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         @foreach ($langs as $key => $lang)
-                        <li><a class="dropdown-item" href='#'>{{$lang->name}}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('changeLanguage', ['lang' => $lang->code]) }}">{{$lang->name}}</a></li>
                         @endforeach
                     </ul>
                 </li>

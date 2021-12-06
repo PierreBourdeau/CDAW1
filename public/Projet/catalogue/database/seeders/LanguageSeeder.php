@@ -22,13 +22,13 @@ class LanguageSeeder extends Seeder
             'code' => 'en'
         ]);
         //Create default french language
-        DB::table('languages')->insert([
+        $fr_lang = DB::table('languages')->insertGetId([
             'name' => 'french',
             'is_default' => 0,
             'rtl' => 0,
             'code' => 'fr'
         ]);
 
-        $this->callWith(BasicSettingsSeeder::class, ['defaultLang' => $defaultLang]);
+        $this->callWith(BasicSettingsSeeder::class, ['defaultLang' => $defaultLang, 'fr_lang' => $fr_lang]);
     }
 }

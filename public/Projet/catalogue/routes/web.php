@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/changelanguage/{lang}/{type?}', 'Front\FrontendController@changeLanguage')->name('changeLanguage');
+Route::get('/changelanguage/{lang}', 'Front\FrontendController@changeLanguage')->name('changeLanguage');
 
 /*=======================================================
 ******************** User Routes **********************

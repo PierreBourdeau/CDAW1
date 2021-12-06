@@ -21,7 +21,7 @@
     var swiper = new Swiper(".swiper", {
         slidesPerView: "auto",
         spaceBetween: 30,
-        loop: true,
+        loop: false,
         slidesPerGroup: 1,
         preloadImages: false,
         lazy: true,

@@ -44,7 +44,7 @@
                     </div>
                     <div class="col text-center">
                         @if(Auth::check())
-                        @if(!Auth::user()->seen->where('media_id', $media->id)->first()->exists())
+                        @if(!Auth::user()->seen()->where('media_id', $media->id)->exists())
                         <button class="btn btn-sm btn-success" type="button" id="addToSeenListBtn"
                             onclick="displayAddToSeenModal(this)" data-media="{{$media->id}}"
                             data-bs-target="#mediaModal" data-bs-toggle="modal">
@@ -65,6 +65,12 @@
                         </a>
                         @endif
                     </div>
+                </div>
+                <div class="d-flex flex-wrap mt-3">
+                    @foreach($media->tags as $tag)
+                    <button type="button" class="tag_a btn btn-primary btn-sm">
+                        {{$tag->name}}</button>
+                    @endforeach
                 </div>
                 <div class="row mt-3">
                     <div class="col flex-column d-flex">

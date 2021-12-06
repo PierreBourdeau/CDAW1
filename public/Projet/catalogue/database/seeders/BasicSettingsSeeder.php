@@ -12,11 +12,15 @@ class BasicSettingsSeeder extends Seeder
      *
      * @return void
      */
-    public function run(int $defaultLang)
+    public function run(int $defaultLang, int $fr_lang)
     {
         //Create default basic app settings
         DB::table('basic_settings')->insert([
             'language_id' => $defaultLang,
+            'website_title' => 'UV CDAW'
+        ]);
+        DB::table('basic_settings')->insert([
+            'language_id' => $fr_lang,
             'website_title' => 'UV CDAW'
         ]);
     }

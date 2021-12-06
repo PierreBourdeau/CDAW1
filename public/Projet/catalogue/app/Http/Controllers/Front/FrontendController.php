@@ -87,16 +87,18 @@ class FrontendController extends Controller
     }
 
 
-    public function changeLanguage($lang, $type = 'website')
+    public function changeLanguage($lang)
     {
         session()->put('lang', $lang);
         app()->setLocale($lang);
 
-        return redirect()->route('front.index');
+        return back();
     }
 
     public function addContentForm($name) {
-        return view('user.partials.add-content-form', ['name' => $name]);
+        $data['name'] = $name;
+        $data['tags'] = Tag::get();
+        return view('user.partials.add-content-form', $data);
     }
 
     public function getMedia($id) {

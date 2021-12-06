@@ -11,6 +11,8 @@ use DB;
 use App;
 use App\Models\Media;
 use App\Models\Movie;
+use App\Models\Serie;
+use App\Models\Tag;
 use App\Models\Comment;
 use Session;
 
@@ -24,6 +26,7 @@ class AdminController extends Controller
 
     public function editMediaView($id) {
         $data['media'] = Media::findOrFail($id);
+        $data['tags'] = Tag::get();
         return view('edit-media', $data);
     }
 
@@ -42,6 +45,9 @@ class AdminController extends Controller
         if ($media_type == 'Movie') {
             $rules['length'] = 'required';
             $rules['cast'] = 'required';
+        } else if ($media_type == 'Serie') {
+            $rules['seasons'] = 'required|numeric|min:1';
+            $rules['cast'] = 'required';
         }
 
         $request->validate($rules);
@@ -52,13 +58,15 @@ class AdminController extends Controller
             $file->move('front/img/media/', $name);
             $input['image'] = $name;
         }
-        $movie = new Movie;
-        $movie->fill($input)->save();
+        if ($media_type == 'Movie') {
+            $newMedia = Movie::create($input);
+        } else if ($media_type == 'Serie') {
+            $newMedia = Serie::create($input);
+        }
+        
+        $media = $newMedia->media()->create($input);
+        $media->tags()->attach($request->input('tags'));
 
-        $media = new Media;
-        $media->fill($input);
-
-        $movie->media()->save($media);
         return back();
         }
     }
@@ -73,13 +81,14 @@ class AdminController extends Controller
         $rules = [
             'title' => 'required',
             'year' => 'required',
-            'description' => 'required',
-            'creator' => 'required',
             'id' => 'required',
         ];
 
         if ($media_type == 'Movie') {
             $rules['length'] = 'required';
+            $rules['cast'] = 'required';
+        } else if ($media_type == 'Serie') {
+            $rules['seasons'] = 'required|numeric|min:1';
             $rules['cast'] = 'required';
         }
 

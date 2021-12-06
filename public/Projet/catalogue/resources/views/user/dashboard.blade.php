@@ -26,17 +26,6 @@
         </div>
         <div class="col-md mb-5 text-center">
             <div class="feature-icon bg-primary bg-gradient">
-                <i class="fas fa-book"></i>
-            </div>
-            <h2>{{__('Book')}}</h2>
-            <p>{{__('Add a book or a book serie to the database like : mangas, novel... providing all the associated datas')}}
-            </p>
-            <button id="addBookBtn" type="button" class="btn btn-primary" data-bs-target="#addContentModal">
-                {{__('Add book')}}
-            </button>
-        </div>
-        <div class="col-md mb-5 text-center">
-            <div class="feature-icon bg-primary bg-gradient">
                 <i class="far fa-comment-dots"></i>
             </div>
             <h2>{{__('Manage comments')}}</h2>
@@ -130,7 +119,7 @@
         <div class="mb-3">
             <label for="oldPasswordInput" class="form-label">{{__('Old password')}}</label>
             <input required type="password" name="old_password" id="oldPasswordInput" class="form-control"
-                placeholder="Old password" aria-label="Old password">
+                placeholder="{{__('Old password')}}" aria-label="Old password">
             @if ($errors->has('old_password'))
             <p class="text-danger mb-0 mt-2">{{$errors->first('old_password')}}</p>
             @endif
@@ -140,7 +129,7 @@
         <div class="col">
             <label for="passwordInput" class="form-label">{{__('Password')}}</label>
             <input id="passwordInput" required type="password" name="password" class="form-control"
-                placeholder="Password" aria-label="Password">
+                placeholder="{{__('Password')}}" aria-label="Password">
             @if ($errors->has('password'))
             <p class="text-danger mb-0 mt-2">{{$errors->first('password')}}</p>
             @endif
@@ -148,7 +137,7 @@
         <div class="col">
             <label for="password_confirmationInput" class="form-label">{{__('Password confirmation')}}</label>
             <input id="password_confirmationInput" required type="password" name="password_confirmation"
-                class="form-control" placeholder="{{__('Confirm password')}}" aria-label="Password confirmation">
+                class="form-control" placeholder="{{__('Password confirmation')}}" aria-label="Password confirmation">
             @if ($errors->has('password_confirmation'))
             <p class="text-danger mb-0 mt-2">{{$errors->first('password_confirmation')}}</p>
             @endif
