@@ -15,10 +15,10 @@
                         class="fas fa-film"></i> {{__('Movies')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"> <i class="fas fa-book-open"></i> Mangas</a>
+                <a class="nav-link"> <i class="fas fa-book-open"></i> {{__('Mangas')}}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link"> <i class="fas fa-pencil-alt"></i> Cartoons</a>
+                <a class="nav-link"> <i class="fas fa-pencil-alt"></i>{{__('Cartoons')}}</a>
             </li>
         </ul>
         <div class="container-fluid">
@@ -32,7 +32,7 @@
         @auth
         <div>
             <div class="d-flex align-items-baseline justify-content-center">
-                <h5 class="px-2 text-light">Playlists</h5>
+                <h5 class="px-2 text-light">{{__('Playlists')}}</h5>
                 <a class="badge bg-primary rounded-pill" data-bs-toggle="collapse" href="#playlistCollapse"
                     role="button" aria-expanded="false" aria-controls="playlistCollapse">
                     <i class="fas fa-plus text-light"></i> </a>

@@ -9,7 +9,7 @@
     <div class="container-fluid py-3">
         <div class="d-flex container-fluid align-items-center">
             <div class="d-flex flex-column justify-content-center flex-fill">
-                <h3>Register</h3>
+                <h3>{{__('Register')}}</h3>
                 <form id="registerForm" action="{{route('user-register-submit')}}" method="POST">
                     @csrf
                     <div class="row g-3 mb-3">
@@ -49,17 +49,17 @@
                         <div class="form-check form-check-inline">
                             <input required name="gender" class="form-check-input" type="radio"
                                 name="inlineRadioOptions" id="inlineRadio1" value="men">
-                            <label class="form-check-label" for="inlineRadio1">Men</label>
+                            <label class="form-check-label" for="inlineRadio1">{{__('Men')}}</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input required name="gender" class="form-check-input" type="radio"
                                 name="inlineRadioOptions" id="inlineRadio2" value="woman">
-                            <label class="form-check-label" for="inlineRadio2">Woman</label>
+                            <label class="form-check-label" for="inlineRadio2">{{__('Woman')}}</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input required name="gender" class="form-check-input" type="radio"
                                 name="inlineRadioOptions" id="inlineRadio3" value="other">
-                            <label class="form-check-label" for="inlineRadio3">Other</label>
+                            <label class="form-check-label" for="inlineRadio3">{{__('Other')}}</label>
                         </div>
                         @if ($errors->has('gender'))
                         <p class="text-danger mb-0 mt-2">{{$errors->first('gender')}}</p>
@@ -70,7 +70,7 @@
                         <div class="form-floating">
                             <input required name="email" type="email" class="form-control" id=" floatingInput"
                                 placeholder="name@example.com" value="{{Request::old('email')}}">
-                            <label for="floatingInput">Email address</label>
+                            <label for="floatingInput">{{__('Email address')}}</label>
                         </div>
                         @if ($errors->has('email'))
                         <p class="text-danger mb-0 mt-2">{{$errors->first('email')}}</p>
@@ -81,7 +81,7 @@
                         <div class="form-floating">
                             <input required name="password" type="password" class="form-control" id=" floatingPassword"
                                 placeholder="Password">
-                            <label for="floatingPassword">Password</label>
+                            <label for="floatingPassword">{{__('Password')}}</label>
                         </div>
                         @if ($errors->has('password'))
                         <p class="text-danger mb-0 mt-2">{{$errors->first('password')}}</p>
@@ -91,7 +91,7 @@
                         <div class="form-floating">
                             <input required name="password_confirmation" type="password" class="form-control"
                                 id=" floatingPasswordConfirm" placeholder="Password confirmation">
-                            <label for="floatingPasswordConfirm">Confirm Password</label>
+                            <label for="floatingPasswordConfirm">{{__('Confirm Password')}}</label>
                         </div>
                         @if ($errors->has('password_confirmation'))
                         <p class="text-danger mb-0 mt-2">{{$errors->first('password_confirmation')}}</p>
@@ -99,12 +99,13 @@
                     </div>
                     <div id="err_msg" class="text-danger"></div>
                     <div class="d-flex justify-content-center mb-5">
-                        <button class="btn btn-primary" type="submit" id="registerSubmitBtn">Register</button>
+                        <button class="btn btn-primary" type="submit" id="registerSubmitBtn">{{__('Register')}}</button>
                     </div>
                 </form>
                 <div class="d-flex flex-column">
-                    <p>Already have an account ? </br><a style="cursor: pointer;" href="{{route('user.login')}}"
-                            id="loginBtn"><strong class="theme-font-color">Sign In here!</strong></a></p>
+                    <p>{{__('Already have an account ?')}}' </br><a style="cursor: pointer;"
+                            href="{{route('user.login')}}" id="loginBtn"><strong class="theme-font-color">{{__('Sign In
+                                here!')}}</strong></a></p>
                 </div>
             </div>
         </div>
